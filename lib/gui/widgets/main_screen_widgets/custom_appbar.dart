@@ -3,48 +3,68 @@ import 'package:flutter/material.dart';
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppbar({
     super.key,
-    this.ending,
-    this.title = '',
     this.leading,
+    this.title = '',
+    this.ending,
   });
 
   final String title;
-  final Widget? leading;
-  final Widget? ending;
+  final leading;
+  final ending;
 
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.only(left: 20),
-              alignment: Alignment.center,
-              child: leading == null ? const SizedBox(width: 20, height: 10,): Center(child: leading),
-            ),
-            Container(
-              alignment: Alignment.center,
-              child: Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.white
-                ),
-                textDirection: TextDirection.ltr
-              ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              child: ending
-            )
-          ],
+    return getDefaultCustomAppBar();
+  }
+
+
+  Widget getDefaultCustomAppBar() {
+    return AppBar(
+      backgroundColor: Colors.black54,
+      elevation: 0.0,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20)
+          ),
+          color: Colors.black54,
         ),
       ),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(20),
+        ),
+      ),
+      leading: leading == null ? null : Container(
+        alignment: Alignment.center,
+        child: const Icon(
+          Icons.arrow_back,
+          color: Colors.white,
+        ),
+      ),
+      title: Container(
+        alignment: Alignment.center,
+        child: Text(
+          title,
+          style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontFamily: 'Pacifico'
+          ),
+        ),
+      ),
+      actions: [
+        ending == null ? Container() : Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.only(right: 13),
+          child: Icon(
+            ending! as IconData,
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
 
@@ -52,6 +72,6 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size(
       double.maxFinite,
-      80
+      50
   );
 }

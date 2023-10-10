@@ -1,7 +1,6 @@
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/custom_appbar.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter/material.dart';
-
 import 'catalog_page_widgets/catalog_widget.dart';
 
 
@@ -95,9 +94,12 @@ class MainScreenContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      appBar: const CustomAppbar(
+        title: 'SmolGU Change.org',
+      ),
       body: PersistentTabView(
         context,
-        margin: const EdgeInsets.only(left: 30, bottom: 15, right: 30),
+        margin: const EdgeInsets.only(left: 15, bottom: 15, right: 15),
         controller: _controller,
         screens: _screensList(),
         items: _itemsList(),
@@ -110,7 +112,7 @@ class MainScreenContainer extends StatelessWidget {
         decoration: NavBarDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: Colors.black54
+              color: Colors.black54
           ),
           colorBehindNavBar: Colors.black87,
         ),

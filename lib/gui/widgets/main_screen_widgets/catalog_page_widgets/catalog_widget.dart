@@ -30,7 +30,7 @@ class _CatalogListState extends State<CatalogList> {
       decoration: const BoxDecoration(
           color:Colors.black87
       ),
-      padding: const EdgeInsets.only(left: 15, right: 15, top: 5),
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
       child: FutureBuilder(
           future: _jsonDataFromFuture,
           builder: (context, snapshot) {
@@ -38,10 +38,10 @@ class _CatalogListState extends State<CatalogList> {
               return ListView.builder(
                   itemCount: snapshot.data!.length + 1,
                   itemBuilder: (context, index) {
-                    if(index != snapshot.data!.length) {
-                      return Item(petition: snapshot.data![index]);
-                    } else {
+                    if(index == snapshot.data!.length) {
                       return const SizedBox(height: 40);
+                    } else {
+                      return Item(petition: snapshot.data![index]);
                     }
                   }
               );
@@ -63,5 +63,4 @@ class _CatalogListState extends State<CatalogList> {
       ),
     );
   }
-
 }

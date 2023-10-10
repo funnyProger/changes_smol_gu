@@ -1,5 +1,5 @@
 import 'package:changes_smol_gu/data/entities/petition.dart';
-import 'package:changes_smol_gu/gui/widgets/page_routes/to_info_page.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/info_page_widgets/info_page_container_widget.dart';
 import 'package:flutter/material.dart';
 import 'parallax_animation/parallax_flow_delegate.dart';
 
@@ -13,11 +13,16 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.only(bottom: 15),
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
         onTap: () {
-          Navigator.of(context).push(ToInfoPage().createAndGetRoute());
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => InfoPageContainer(petition: petition)
+            )
+          );
         },
         child: AspectRatio(
           aspectRatio: 16 / 16,

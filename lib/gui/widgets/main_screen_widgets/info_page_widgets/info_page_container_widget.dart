@@ -1,14 +1,38 @@
+import 'package:changes_smol_gu/data/entities/petition.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/info_page_widgets/info_page_widget.dart';
 import 'package:flutter/material.dart';
 
 class InfoPageContainer extends StatelessWidget {
-  const InfoPageContainer({super.key});
+  const InfoPageContainer({super.key, required this.petition});
+  final Petition petition;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: const InfoPage(),
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Colors.black87
+        ),
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 103),
+                child: InfoPage(petition: petition),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(bottom: 60),
+              alignment: Alignment.bottomCenter,
+              child: FloatingActionButton(
+                onPressed: () {
+
+                },
+              ),
+            )
+          ],
+        )
+      ),
     );
   }
 

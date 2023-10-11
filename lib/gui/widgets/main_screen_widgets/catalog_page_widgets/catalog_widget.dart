@@ -28,7 +28,7 @@ class _CatalogListState extends State<CatalogList> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          color:Colors.black87
+          color: Colors.black87
       ),
       padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
       child: FutureBuilder(
@@ -50,7 +50,7 @@ class _CatalogListState extends State<CatalogList> {
                 child: Text(
                     'Ошибка загрузки летны :(',
                     style: TextStyle(fontSize: 20, color: Colors.black),
-                    textDirection: TextDirection.ltr
+                    textDirection: TextDirection.ltr,
                 ),
               );
             }

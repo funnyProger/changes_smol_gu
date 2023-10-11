@@ -1,4 +1,6 @@
 import 'package:changes_smol_gu/data/entities/petition.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/catalog_page_widgets/favorite_icon_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/catalog_page_widgets/voices_icon_widget.dart';
 import 'package:flutter/material.dart';
 
 class InfoPage extends StatelessWidget {
@@ -18,18 +20,32 @@ class InfoPage extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Container(
-            alignment: Alignment.center,
-            child: AspectRatio(
-              aspectRatio: 16 / 16,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.network(
-                  petition.image,
-                  fit: BoxFit.cover,
+          Stack(
+            children: [
+              Container(
+                alignment: Alignment.center,
+                child: AspectRatio(
+                  aspectRatio: 16 / 16,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.network(
+                      petition.image,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Positioned(
+                right: 20,
+                top: 20,
+                child: FavoriteIcon(petition: petition)
+              ),
+              const Positioned(
+                  left: 20,
+                  top: 20,
+                  child: VoicesIcon()
+              )
+            ]
           ),
           Container(
             alignment: Alignment.centerLeft,

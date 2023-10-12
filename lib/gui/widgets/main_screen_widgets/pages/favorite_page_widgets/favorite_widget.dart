@@ -1,5 +1,5 @@
 import 'package:changes_smol_gu/core/models/favorites_model.dart';
-import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/catalog_page_widgets/catalog_item/item_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_page_widgets/catalog_item/item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +17,7 @@ class FavoriteList extends StatelessWidget {
         ),
         padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
         child: ListView.builder(
-            itemCount: context.watch<FavoritesModel>().getFavoritesList().length,
+            itemCount: context.watch<FavoritesModel>().getFavoritesList().length + 1,
             itemBuilder: (context, index) {
               if(index == context.watch<FavoritesModel>().getFavoritesList().length) {
                 return const SizedBox(height: 40);

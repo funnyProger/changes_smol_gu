@@ -1,6 +1,6 @@
 import 'package:changes_smol_gu/data/entities/petition.dart';
-import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/catalog_page_widgets/favorite_icon_widget.dart';
-import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/catalog_page_widgets/voices_icon_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_page_widgets/favorite_icon_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_page_widgets/voices_icon_widget.dart';
 import 'package:flutter/material.dart';
 
 class InfoPage extends StatelessWidget {
@@ -10,7 +10,7 @@ class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(15),
+      margin: const EdgeInsets.all(13),
       decoration: const BoxDecoration(
           color: Colors.black54,
           borderRadius: BorderRadius.only(

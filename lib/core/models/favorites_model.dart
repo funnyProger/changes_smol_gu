@@ -1,6 +1,6 @@
 import 'package:changes_smol_gu/data/entities/petition.dart';
 import 'package:changes_smol_gu/data/singletons/favorites.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 class FavoritesModel extends ChangeNotifier {
   final Favorites _favoritesInstance = Favorites.getInstance();

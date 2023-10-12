@@ -1,6 +1,7 @@
 import 'package:changes_smol_gu/data/entities/petition.dart';
-import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/info_page_widgets/info_page_widget.dart';
 import 'package:flutter/material.dart';
+
+import 'info_page_widget.dart';
 
 class InfoPageContainer extends StatefulWidget {
   const InfoPageContainer({super.key, required this.petition});
@@ -61,7 +62,7 @@ class InfoPageContainerState extends State<InfoPageContainer> {
         side: const BorderSide(
           color: Colors.grey
         ),
-        minimumSize: const Size(200, 50),
+        minimumSize: const Size(200, 47),
         backgroundColor: _onPressed == true ? Colors.red : Colors.blue,
       ),
       onPressed: () async {
@@ -89,8 +90,8 @@ class InfoPageContainerState extends State<InfoPageContainer> {
 
   Widget getSmallButton() {
     return Container(
-      height: 50,
-      width: 50,
+      height: 47,
+      width: 47,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: Colors.green,

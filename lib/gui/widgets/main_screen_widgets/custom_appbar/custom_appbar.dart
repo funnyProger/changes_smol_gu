@@ -1,8 +1,30 @@
 import 'package:flutter/material.dart';
 
-class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
+
+class CustomAppbar extends StatefulWidget {
   const CustomAppbar({
     super.key,
+    this.leading,
+    this.title = '',
+    this.ending,
+  });
+  final String title;
+  final leading;
+  final ending;
+
+
+  @override
+  State<CustomAppbar> createState() =>
+      _CustomAppbarState(
+          leading: leading,
+          title: title,
+          ending: ending
+      );
+}
+
+
+class _CustomAppbarState extends State<CustomAppbar> {
+  _CustomAppbarState({
     this.leading,
     this.title = '',
     this.ending,
@@ -15,11 +37,11 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return getDefaultCustomAppBar();
+    return getDefaultCustomAppBar(context);
   }
 
 
-  Widget getDefaultCustomAppBar() {
+  Widget getDefaultCustomAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.black54,
       elevation: 0.0,
@@ -46,6 +68,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Container(
         alignment: Alignment.center,
+        padding: const EdgeInsets.only(left: 50, right: 50),
         child: Text(
           title,
           style: const TextStyle(
@@ -53,25 +76,9 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
               fontSize: 20,
               fontFamily: 'Pacifico'
           ),
+          softWrap: true,
         ),
       ),
-      actions: [
-        ending == null ? Container() : Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.only(right: 13),
-          child: Icon(
-            ending! as IconData,
-            color: Colors.white,
-          ),
-        ),
-      ],
     );
   }
-
-
-  @override
-  Size get preferredSize => const Size(
-      double.maxFinite,
-      50
-  );
 }

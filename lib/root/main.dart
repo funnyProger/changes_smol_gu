@@ -1,15 +1,18 @@
+import 'package:changes_smol_gu/core/models/catalog_model.dart';
 import 'package:changes_smol_gu/core/models/favorites_model.dart';
+import 'package:changes_smol_gu/data/singletons/catalog.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/main_screen_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  await initAllData();
 
   runApp(
       MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => FavoritesModel())
+          ChangeNotifierProvider(create: (context) => FavoritesModel()),
+          ChangeNotifierProvider(create: (context) => CatalogModel()),
         ],
         child: const Application(),
       )
@@ -26,5 +29,10 @@ class Application extends StatelessWidget {
       debugShowCheckedModeBanner: false
     );
   }
+}
+
+initAllData() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Catalog.initCatalogList();
 }
 

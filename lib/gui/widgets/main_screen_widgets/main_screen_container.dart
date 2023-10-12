@@ -1,19 +1,18 @@
-import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/custom_appbar.dart';
-import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/favorite_page/favorite_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_page_widgets/catalog_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/favorite_page_widgets/favorite_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/search_page_widgets/search_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter/material.dart';
-import 'catalog_page_widgets/catalog_widget.dart';
+import 'custom_appbar/custom_appbar.dart';
 
 
 class MainScreenContainer extends StatelessWidget {
   MainScreenContainer({super.key});
 
-  final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
+  final PersistentTabController _controller = PersistentTabController(initialIndex: 2);
 
   List<Widget> _screensList() {
     return [
-      const CatalogList(),
-      const FavoriteList(),
       Container(
         decoration: const BoxDecoration(
             color:Colors.black87
@@ -29,6 +28,9 @@ class MainScreenContainer extends StatelessWidget {
           ),
         ),
       ),
+      const SearchPage(),
+      const CatalogList(),
+      const FavoriteList(),
       Container(
         decoration: const BoxDecoration(
             color:Colors.black87
@@ -50,6 +52,18 @@ class MainScreenContainer extends StatelessWidget {
   List<PersistentBottomNavBarItem> _itemsList() {
     return [
       PersistentBottomNavBarItem(
+        icon: const Icon(Icons.create),
+        title: ('Create'),
+        activeColorPrimary: Colors.white,
+        inactiveColorPrimary: Colors.grey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.search),
+        title: ('Search'),
+        activeColorPrimary: Colors.white,
+        inactiveColorPrimary: Colors.grey,
+      ),
+      PersistentBottomNavBarItem(
         icon: const Icon(Icons.format_list_bulleted_rounded),
         title: ('Catalog'),
         activeColorPrimary: Colors.white,
@@ -58,12 +72,6 @@ class MainScreenContainer extends StatelessWidget {
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.favorite),
         title: ('Favorites'),
-        activeColorPrimary: Colors.white,
-        inactiveColorPrimary: Colors.grey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.create),
-        title: ('Create'),
         activeColorPrimary: Colors.white,
         inactiveColorPrimary: Colors.grey,
       ),
@@ -77,16 +85,21 @@ class MainScreenContainer extends StatelessWidget {
   }
 
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const CustomAppbar(
-        title: 'SmolGU Change.org',
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50.0), // here the desired height
+        child: CustomAppbar(
+          title: 'SmolGU Change.org',
+          ending: Icons.search,
+        ),
       ),
       body: PersistentTabView(
         context,
-        margin: const EdgeInsets.only(left: 15, bottom: 15, right: 15),
+        margin: const EdgeInsets.only(left: 13, bottom: 15, right: 13),
         controller: _controller,
         screens: _screensList(),
         items: _itemsList(),

@@ -1,4 +1,4 @@
-import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/catalog_page_widgets/catalog_item/parallax_animation/parallax_parent_data_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_page_widgets/catalog_item/parallax_animation/parallax_parent_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 

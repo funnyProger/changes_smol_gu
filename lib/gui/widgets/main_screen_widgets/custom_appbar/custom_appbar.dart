@@ -14,8 +14,7 @@ class CustomAppbar extends StatefulWidget {
 
 
   @override
-  State<CustomAppbar> createState() =>
-      _CustomAppbarState(
+  State<CustomAppbar> createState() => _CustomAppbarState(
           leading: leading,
           title: title,
           ending: ending
@@ -37,19 +36,18 @@ class _CustomAppbarState extends State<CustomAppbar> {
 
   @override
   Widget build(BuildContext context) {
-    return getDefaultCustomAppBar(context);
+    return customAppBar(context);
   }
 
-
-  Widget getDefaultCustomAppBar(BuildContext context) {
+  Widget customAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.black54,
+      backgroundColor: const Color.fromARGB(187, 0, 0, 0),
       elevation: 0.0,
       flexibleSpace: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(20),
-            bottomRight: Radius.circular(20)
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20)
           ),
           color: Colors.black54,
         ),

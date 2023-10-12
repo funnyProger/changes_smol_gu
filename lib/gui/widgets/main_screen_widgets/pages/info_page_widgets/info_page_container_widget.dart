@@ -9,13 +9,13 @@ class InfoPageContainer extends StatefulWidget {
 
 
   @override
-  State<InfoPageContainer> createState() => InfoPageContainerState(petition: petition);
+  State<InfoPageContainer> createState() => _InfoPageContainerState(petition: petition);
 }
 
 enum ButtonState { init, done }
 
-class InfoPageContainerState extends State<InfoPageContainer> {
-  InfoPageContainerState({required this.petition});
+class _InfoPageContainerState extends State<InfoPageContainer> {
+  _InfoPageContainerState({required this.petition});
   final Petition petition;
   ButtonState state = ButtonState.init;
   bool _isAnimating = true;
@@ -42,7 +42,7 @@ class InfoPageContainerState extends State<InfoPageContainer> {
               padding: const EdgeInsets.only(bottom: 60),
               alignment: Alignment.bottomCenter,
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 200),
                 width: state == ButtonState.init ? 200 : 50,
                 onEnd: () => setState(() => _isAnimating = !_isAnimating),
                 curve: Curves.ease,
@@ -69,7 +69,7 @@ class InfoPageContainerState extends State<InfoPageContainer> {
         setState(() {
           state = ButtonState.done;
         });
-        await Future.delayed(const Duration(milliseconds: 1200));
+        await Future.delayed(const Duration(milliseconds: 1600));
         setState(() {
           _onPressed = !_onPressed;
           state = ButtonState.init;

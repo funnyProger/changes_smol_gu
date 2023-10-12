@@ -32,6 +32,15 @@ class CatalogList extends StatelessWidget {
         child: ListView.builder(
             itemCount: context.read<CatalogModel>().getCatalogList().length + 1,
             itemBuilder: (context, index) {
+              if(index == 0) {
+                return Column(
+                  children: [
+                    const SizedBox(height: 55),
+                    Item(petition: context.read<CatalogModel>()
+                        .getCatalogList()[index])
+                  ],
+                );
+              }
               if(index == context.read<CatalogModel>().getCatalogList().length) {
                 return const SizedBox(height: 40);
               } else {

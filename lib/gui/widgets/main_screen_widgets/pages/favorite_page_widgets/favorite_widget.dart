@@ -15,14 +15,24 @@ class FavoriteList extends StatelessWidget {
         decoration: const BoxDecoration(
             color: Colors.black87
         ),
-        padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+        padding: const EdgeInsets.only(left: 15, right: 15, top: 12),
         child: ListView.builder(
             itemCount: context.watch<FavoritesModel>().getFavoritesList().length + 1,
             itemBuilder: (context, index) {
+              if(index == 0) {
+                return Column(
+                  children: [
+                    const SizedBox(height: 55),
+                    Item(petition: context.watch<FavoritesModel>()
+                        .getFavoritesList()[index])
+                  ],
+                );
+              }
               if(index == context.watch<FavoritesModel>().getFavoritesList().length) {
                 return const SizedBox(height: 40);
               } else {
-                return Item(petition: context.watch<FavoritesModel>().getFavoritesList()[index]);
+                return Item(petition: context.watch<FavoritesModel>()
+                    .getFavoritesList()[index]);
               }
             }
         ),
@@ -34,11 +44,11 @@ class FavoriteList extends StatelessWidget {
         ),
         child: Container(
           alignment: Alignment.center,
+          padding: const EdgeInsets.only(top: 60),
           child: const Text(
               'Favoarites',
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15
+                  color: Colors.grey,
               )
           ),
         ),

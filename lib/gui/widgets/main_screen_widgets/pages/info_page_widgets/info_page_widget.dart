@@ -7,6 +7,7 @@ class InfoPage extends StatelessWidget {
   const InfoPage({super.key, required this.petition});
   final Petition petition;
 
+
   @override
   Widget build(BuildContext context) {
     return Container(

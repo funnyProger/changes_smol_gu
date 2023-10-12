@@ -8,8 +8,8 @@ import 'custom_appbar/custom_appbar.dart';
 
 class MainScreenContainer extends StatelessWidget {
   MainScreenContainer({super.key});
-
   final PersistentTabController _controller = PersistentTabController(initialIndex: 2);
+
 
   List<Widget> _screensList() {
     return [
@@ -49,6 +49,7 @@ class MainScreenContainer extends StatelessWidget {
     ];
   }
 
+
   List<PersistentBottomNavBarItem> _itemsList() {
     return [
       PersistentBottomNavBarItem(
@@ -85,50 +86,60 @@ class MainScreenContainer extends StatelessWidget {
   }
 
 
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(50.0), // here the desired height
-        child: CustomAppbar(
-          title: 'SmolGU Change.org',
-          ending: Icons.search,
-        ),
+    return Container(
+      decoration: const BoxDecoration(
+          color: Colors.black87
       ),
-      body: PersistentTabView(
-        context,
-        margin: const EdgeInsets.only(left: 13, bottom: 15, right: 13),
-        controller: _controller,
-        screens: _screensList(),
-        items: _itemsList(),
-        confineInSafeArea: true,
-        backgroundColor: Colors.black54,
-        handleAndroidBackButtonPress: true,
-        resizeToAvoidBottomInset: true,
-        stateManagement: true,
-        hideNavigationBarWhenKeyboardShows: true,
-        decoration: NavBarDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-              color: Colors.black54
+      child: Stack(
+        children: [
+          PersistentTabView(
+            context,
+            margin: const EdgeInsets.only(left: 13, bottom: 15, right: 13),
+            controller: _controller,
+            screens: _screensList(),
+            items: _itemsList(),
+            confineInSafeArea: true,
+            backgroundColor: Colors.black54,
+            handleAndroidBackButtonPress: true,
+            resizeToAvoidBottomInset: true,
+            stateManagement: true,
+            hideNavigationBarWhenKeyboardShows: true,
+            decoration: NavBarDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                  color: Colors.black54
+              ),
+              colorBehindNavBar: Colors.white12,
+            ),
+            popAllScreensOnTapOfSelectedTab: true,
+            popActionScreens: PopActionScreensType.all,
+            itemAnimationProperties: const ItemAnimationProperties(
+              duration: Duration(milliseconds: 200),
+              curve: Curves.ease,
+            ),
+            screenTransitionAnimation: const ScreenTransitionAnimation(
+              animateTabTransition: true,
+              curve: Curves.ease,
+              duration: Duration(milliseconds: 200),
+            ),
+            navBarStyle: NavBarStyle.style1,
           ),
-          colorBehindNavBar: Colors.black87,
-        ),
-        popAllScreensOnTapOfSelectedTab: true,
-        popActionScreens: PopActionScreensType.all,
-        itemAnimationProperties: const ItemAnimationProperties(
-          duration: Duration(milliseconds: 200),
-          curve: Curves.ease,
-        ),
-        screenTransitionAnimation: const ScreenTransitionAnimation(
-          animateTabTransition: true,
-          curve: Curves.ease,
-          duration: Duration(milliseconds: 200),
-        ),
-        navBarStyle: NavBarStyle.style1,
+          Container(
+            height: 100,
+            alignment: Alignment.center,
+            child: const PreferredSize(
+              preferredSize: Size.fromHeight(50.0), // here the desired height
+              child: CustomAppbar(
+                title: 'SmolGU Change.org',
+                ending: Icons.search,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
+
 }

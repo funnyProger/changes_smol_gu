@@ -3,8 +3,8 @@ import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_pa
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class FavoriteList extends StatelessWidget {
-  const FavoriteList({super.key});
+class FavoritePage extends StatelessWidget {
+  const FavoritePage({super.key});
 
 
   @override
@@ -15,21 +15,12 @@ class FavoriteList extends StatelessWidget {
         decoration: const BoxDecoration(
             color: Colors.black87
         ),
-        padding: const EdgeInsets.only(left: 15, right: 15, top: 12),
+        padding: const EdgeInsets.only(bottom: 15, left: 8, right: 8),
         child: ListView.builder(
             itemCount: context.watch<FavoritesModel>().getFavoritesList().length + 1,
             itemBuilder: (context, index) {
-              if(index == 0) {
-                return Column(
-                  children: [
-                    const SizedBox(height: 55),
-                    Item(petition: context.watch<FavoritesModel>()
-                        .getFavoritesList()[index])
-                  ],
-                );
-              }
               if(index == context.watch<FavoritesModel>().getFavoritesList().length) {
-                return const SizedBox(height: 40);
+                return const SizedBox(height: 35);
               } else {
                 return Item(petition: context.watch<FavoritesModel>()
                     .getFavoritesList()[index]);
@@ -44,7 +35,7 @@ class FavoriteList extends StatelessWidget {
         ),
         child: Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.only(top: 60),
+          padding: const EdgeInsets.only(bottom: 10),
           child: const Text(
               'Favoarites',
               style: TextStyle(

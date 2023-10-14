@@ -1,6 +1,7 @@
-import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_page_widgets/catalog_widget.dart';
-import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/favorite_page_widgets/favorite_widget.dart';
-import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/search_page_widgets/search_page.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_page_widgets/catalog_page_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/create_petition_page/create_petition_page_container_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/favorite_page_widgets/favorite_page_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/search_page_widgets/search_page_widget.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'custom_appbar/custom_appbar.dart';
@@ -13,24 +14,10 @@ class MainScreenContainer extends StatelessWidget {
 
   List<Widget> _screensList() {
     return [
-      Container(
-        decoration: const BoxDecoration(
-            color:Colors.black87
-        ),
-        child: Container(
-          alignment: Alignment.center,
-          child: const Text(
-              'Create petition',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15
-              )
-          ),
-        ),
-      ),
+      const CreatePetitionPageContainer(),
       const SearchPage(),
-      const CatalogList(),
-      const FavoriteList(),
+      const CatalogPage(),
+      const FavoritePage(),
       Container(
         decoration: const BoxDecoration(
             color:Colors.black87
@@ -40,8 +27,7 @@ class MainScreenContainer extends StatelessWidget {
           child: const Text(
               'Profile',
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15
+                  color: Colors.grey,
               )
           ),
         ),
@@ -88,58 +74,46 @@ class MainScreenContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          color: Colors.black87
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: CustomAppbar(
+            title: 'SmolGU Change.org'
+        ),
       ),
-      child: Stack(
-        children: [
-          PersistentTabView(
-            context,
-            margin: const EdgeInsets.only(left: 13, bottom: 15, right: 13),
-            controller: _controller,
-            screens: _screensList(),
-            items: _itemsList(),
-            confineInSafeArea: true,
-            backgroundColor: Colors.black54,
-            handleAndroidBackButtonPress: true,
-            resizeToAvoidBottomInset: true,
-            stateManagement: true,
-            hideNavigationBarWhenKeyboardShows: true,
-            decoration: NavBarDecoration(
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                  color: Colors.black54
-              ),
-              colorBehindNavBar: Colors.white12,
-            ),
-            popAllScreensOnTapOfSelectedTab: true,
-            popActionScreens: PopActionScreensType.all,
-            itemAnimationProperties: const ItemAnimationProperties(
-              duration: Duration(milliseconds: 200),
-              curve: Curves.ease,
-            ),
-            screenTransitionAnimation: const ScreenTransitionAnimation(
-              animateTabTransition: true,
-              curve: Curves.ease,
-              duration: Duration(milliseconds: 200),
-            ),
-            navBarStyle: NavBarStyle.style1,
+      body: PersistentTabView(
+        context,
+        margin: const EdgeInsets.only(left: 8, bottom: 15, right: 8),
+        controller: _controller,
+        screens: _screensList(),
+        items: _itemsList(),
+        confineInSafeArea: true,
+        backgroundColor: Colors.black54,
+        handleAndroidBackButtonPress: true,
+        resizeToAvoidBottomInset: true,
+        stateManagement: true,
+        hideNavigationBarWhenKeyboardShows: true,
+        decoration: NavBarDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+              color: Colors.black54
           ),
-          Container(
-            height: 100,
-            alignment: Alignment.center,
-            child: const PreferredSize(
-              preferredSize: Size.fromHeight(50.0), // here the desired height
-              child: CustomAppbar(
-                title: 'SmolGU Change.org',
-                ending: Icons.search,
-              ),
-            ),
-          )
-        ],
+          colorBehindNavBar: Colors.black87,
+        ),
+        popAllScreensOnTapOfSelectedTab: true,
+        popActionScreens: PopActionScreensType.all,
+        itemAnimationProperties: const ItemAnimationProperties(
+          duration: Duration(milliseconds: 200),
+          curve: Curves.ease,
+        ),
+        screenTransitionAnimation: const ScreenTransitionAnimation(
+          animateTabTransition: true,
+          curve: Curves.fastEaseInToSlowEaseOut,
+          duration: Duration(milliseconds: 200),
+        ),
+        navBarStyle: NavBarStyle.style1,
       ),
     );
   }
-
 }

@@ -29,6 +29,8 @@ class _CustomAppbarState extends State<CustomAppbar> {
     this.ending,
   });
 
+  final TextEditingController _textEditingController = TextEditingController();
+
   final String title;
   final leading;
   final ending;
@@ -40,41 +42,46 @@ class _CustomAppbarState extends State<CustomAppbar> {
   }
 
   Widget customAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: const Color.fromARGB(187, 0, 0, 0),
-      elevation: 0.0,
-      flexibleSpace: Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20)
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.black87,
+      ),
+      child: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20)
+            ),
+            color: Colors.black,
           ),
-          color: Colors.black54,
         ),
-      ),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(20),
-        ),
-      ),
-      leading: leading == null ? null : Container(
-        alignment: Alignment.center,
-        child: const Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-        ),
-      ),
-      title: Container(
-        alignment: Alignment.center,
-        padding: const EdgeInsets.only(left: 50, right: 50),
-        child: Text(
-          title,
-          style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontFamily: 'Pacifico'
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
           ),
-          softWrap: true,
+        ),
+        leading: leading == null ? null : Container(
+          alignment: Alignment.center,
+          child: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
+        title: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.only(left: 50, right: 50),
+          child: Text(
+            title,
+            style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Pacifico'
+            ),
+            softWrap: true,
+          ),
         ),
       ),
     );

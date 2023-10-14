@@ -1,3 +1,4 @@
+import 'package:changes_smol_gu/core/controllers/shared_preferences_controller.dart';
 import 'package:changes_smol_gu/core/models/catalog_model.dart';
 import 'package:changes_smol_gu/core/models/favorites_model.dart';
 import 'package:changes_smol_gu/data/singletons/catalog.dart';
@@ -33,6 +34,8 @@ class Application extends StatelessWidget {
 
 initAllData() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Catalog.initCatalogList();
+  SharedPreferencesController().initSharedPreferences();
 }
 

@@ -1,5 +1,5 @@
 import 'package:changes_smol_gu/data/entities/petition.dart';
-import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_page_widgets/favorite_icon_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/buttons/favorite_icon_widget.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_page_widgets/voices_icon_widget.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/info_page_widgets/info_page_container_widget.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.only(top: 8),
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
         onTap: () {

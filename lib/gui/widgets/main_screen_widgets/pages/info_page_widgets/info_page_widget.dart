@@ -11,7 +11,7 @@ class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.only(top: 8, bottom: 8),
       decoration: BoxDecoration(
           color: Colors.black54,
           borderRadius: BorderRadius.circular(20)

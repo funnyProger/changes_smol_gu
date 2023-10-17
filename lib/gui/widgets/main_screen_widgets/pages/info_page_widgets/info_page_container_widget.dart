@@ -19,8 +19,17 @@ class InfoPageContainer extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            SingleChildScrollView(
-              child: InfoPage(petition: petition)
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 8),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20)
+                ),
+                child: SingleChildScrollView(
+                    child: InfoPage(petition: petition)
+                ),
+              ),
             ),
             Container(
                 padding: const EdgeInsets.only(bottom: 60),

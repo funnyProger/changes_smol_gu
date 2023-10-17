@@ -55,6 +55,7 @@ dependencies:
   animated_search_bar: ^2.7.0
   expandable_search_bar: ^0.0.2
   animated_snack_bar: ^0.3.1
+  flutter_side_menu: ^0.4.0
 
 dev_dependencies:
   flutter_test:

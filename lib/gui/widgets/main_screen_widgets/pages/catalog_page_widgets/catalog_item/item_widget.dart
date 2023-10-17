@@ -2,6 +2,7 @@ import 'package:changes_smol_gu/data/entities/petition.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/buttons/favorite_icon_widget.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_page_widgets/voices_icon_widget.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/info_page_widgets/info_page_container_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/pages_rout/to_info_and_back.dart';
 import 'package:flutter/material.dart';
 import 'parallax_animation/parallax_flow_delegate.dart';
 
@@ -19,12 +20,7 @@ class Item extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => InfoPageContainer(petition: petition)
-            )
-          );
+          Navigator.of(context).push(routToInfo(petition));
         },
         child: AspectRatio(
           aspectRatio: 16 / 16,

@@ -16,17 +16,29 @@ class FavoritePage extends StatelessWidget {
             color: Colors.black87
         ),
         padding: const EdgeInsets.only(bottom: 15, left: 8, right: 8),
-        child: ListView.builder(
-            itemCount: context.watch<FavoritesModel>().getFavoritesList().length + 1,
-            itemBuilder: (context, index) {
-              if(index == context.watch<FavoritesModel>().getFavoritesList().length) {
-                return const SizedBox(height: 35);
-              } else {
-                return Item(petition: context.watch<FavoritesModel>()
-                    .getFavoritesList()[index]);
-              }
-            }
-        ),
+        child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20)
+            ),
+            child: ListView.builder(
+                itemCount: context
+                    .watch<FavoritesModel>()
+                    .getFavoritesList()
+                    .length + 1,
+                itemBuilder: (context, index) {
+                  if (index == context
+                      .watch<FavoritesModel>()
+                      .getFavoritesList()
+                      .length) {
+                    return const SizedBox(height: 30);
+                  } else {
+                    return Item(petition: context.watch<FavoritesModel>()
+                        .getFavoritesList()[index]);
+                  }
+                }
+            ),
+        )
       );
     } else {
       return Container(

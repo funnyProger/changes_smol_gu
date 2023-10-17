@@ -1,4 +1,6 @@
+import 'package:changes_smol_gu/core/models/current_page_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 class CustomAppbar extends StatefulWidget {
@@ -63,16 +65,20 @@ class _CustomAppbarState extends State<CustomAppbar> {
             bottom: Radius.circular(20),
           ),
         ),
-        leading: leading == null ? null : Container(
-          alignment: Alignment.center,
-          child: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
+        leading: leading == null ? null : InkWell(
+          onTap: () {
+            context.read<CurrentPageModel>().setCurrentPageIndex(0);
+          },
+          borderRadius: BorderRadius.circular(150),
+          splashColor: Colors.white10,
+          child: Icon(
+            leading,
+            size: 25,
+            color: Colors.white24,
           ),
         ),
         title: Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.only(left: 50, right: 50),
           child: Text(
             title,
             style: const TextStyle(

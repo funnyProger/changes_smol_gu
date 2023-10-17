@@ -50,6 +50,47 @@ class _CreatePetitionPageState extends State<CreatePetitionPage> {
   @override
   Widget build(BuildContext context) {
     final isStretched = _isAnimating || state == ButtonState.init;
+    return Stack(
+      children: [
+        Scaffold(
+          resizeToAvoidBottomInset: true,
+          backgroundColor: Colors.black87,
+          body: Container(
+              padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
+              child: SingleChildScrollView(
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(187, 0, 0, 0),
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(20),
+                              topLeft: Radius.circular(20)
+                          ),
+                        ),
+                        child: getPetitionFormCreation(),
+                      )
+                  )
+              ),
+          ),
+        ),
+        Container(
+            alignment: Alignment.bottomCenter,
+            padding: const EdgeInsets.only(bottom: 35),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              width: state == ButtonState.init ? 200 : 50,
+              onEnd: () => setState(() => _isAnimating = !_isAnimating),
+              curve: Curves.ease,
+              child: isStretched ? getDefaultButton() : getSmallButton(state),
+            )
+        )
+      ],
+    );
+  }
+
+
+  Widget getPetitionFormCreation() {
     return Form(
         key: _formKey,
         child: Column(
@@ -70,32 +111,32 @@ class _CreatePetitionPageState extends State<CreatePetitionPage> {
               child: Container(
                 alignment: Alignment.center,
                 child: AspectRatio(
-                  aspectRatio: 16 / 14,
-                  child: ClipRRect(
+                    aspectRatio: 16 / 14,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: InkWell(
+                          onTap: () {
+                            getImageFromDevice();
+                          },
                           borderRadius: BorderRadius.circular(16),
-                          child: InkWell(
-                            onTap: () {
-                              getImageFromDevice();
-                            },
-                            borderRadius: BorderRadius.circular(16),
-                            child: _pickedImage == null ? Container(
-                              decoration: const BoxDecoration(
-                                  color: Colors.white12
-                              ),
-                              child: const Center(
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.grey,
-                                    size: 30,
-                                  )
-                              ),
-                            ) :
-                            Image.file(
-                              File(_pickedImage!.path),
-                              height: 700,
-                              width: 383,
-                              fit: BoxFit.cover,
-                            )
+                          child: _pickedImage == null ? Container(
+                            decoration: const BoxDecoration(
+                                color: Colors.white12
+                            ),
+                            child: const Center(
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.grey,
+                                  size: 30,
+                                )
+                            ),
+                          ) :
+                          Image.file(
+                            File(_pickedImage!.path),
+                            height: 700,
+                            width: 383,
+                            fit: BoxFit.cover,
+                          )
                       ),
                     )
                 ),
@@ -122,7 +163,7 @@ class _CreatePetitionPageState extends State<CreatePetitionPage> {
                       }
                       return null;
                     },
-                    style: const TextStyle(fontSize: 20, color: Colors.white),
+                    style: const TextStyle(fontSize: 15, color: Colors.white),
                     decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       contentPadding:
@@ -175,7 +216,7 @@ class _CreatePetitionPageState extends State<CreatePetitionPage> {
               child: TextFormField(
                 controller: _descriptionTextController,
                 keyboardType: TextInputType.multiline,
-                maxLines: 6,
+                maxLines: 8,
                 cursorOpacityAnimates: true,
                 cursorColor: Colors.white,
                 onTapOutside: (value) {
@@ -238,17 +279,6 @@ class _CreatePetitionPageState extends State<CreatePetitionPage> {
                 ),
               ),
             ),
-            Container(
-              alignment: Alignment.bottomCenter,
-              padding: const EdgeInsets.only(bottom: 55, top: 5),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                width: state == ButtonState.init ? 200 : 50,
-                onEnd: () => setState(() => _isAnimating = !_isAnimating),
-                curve: Curves.ease,
-                child: isStretched ? getDefaultButton() : getSmallButton(state),
-              )
-            )
           ],
         )
     );

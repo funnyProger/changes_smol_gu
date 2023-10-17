@@ -22,17 +22,23 @@ class CatalogPage extends StatelessWidget {
         child: const CircularProgressIndicator(
           color: Colors.indigoAccent,
         ),
-      ) : ListView.builder(
-          itemCount: context.read<CatalogModel>().getCatalogList().length + 1,
-          itemBuilder: (context, index) {
-            if(index == context.read<CatalogModel>().getCatalogList().length) {
-              return const SizedBox(height: 45);
-            } else {
-              return Item(petition: context.read<CatalogModel>()
-                  .getCatalogList()[index]);
+      ) : ClipRRect(
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20)
+          ),
+          child: ListView.builder(
+            itemCount: context.read<CatalogModel>().getCatalogList().length + 1,
+            itemBuilder: (context, index) {
+              if(index == context.read<CatalogModel>().getCatalogList().length) {
+                return const SizedBox(height: 45);
+              } else {
+                return Item(petition: context.read<CatalogModel>()
+                    .getCatalogList()[index]);
+              }
             }
-          }
-      ),
+        ),
+      )
     );
   }
 }

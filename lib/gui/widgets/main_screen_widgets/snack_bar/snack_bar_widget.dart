@@ -18,7 +18,7 @@ SnackBar getSnackBar(String snackBarMessage) {
       ),
     ),
     backgroundColor: Colors.black54,
-    margin: const EdgeInsets.only(left: 110, right: 110, bottom: 150),
+    margin: const EdgeInsets.only(left: 110, right: 110, bottom: 100),
   );
 
   return snackBar;

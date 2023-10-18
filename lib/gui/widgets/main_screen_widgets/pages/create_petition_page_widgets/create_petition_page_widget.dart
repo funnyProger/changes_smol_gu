@@ -1,10 +1,9 @@
 import 'dart:io';
-
 import 'package:changes_smol_gu/core/controllers/device_storage_controller.dart';
-import 'package:changes_smol_gu/core/controllers/shared_preferences_controller.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/snack_bar/snack_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 
 class CreatePetitionPage extends StatefulWidget {
@@ -19,7 +18,6 @@ enum ButtonState { init, loading, done , error}
 
 
 class _CreatePetitionPageState extends State<CreatePetitionPage> {
-  final SharedPreferencesController sherPrefController = SharedPreferencesController();
   final TextEditingController _titleTextController = TextEditingController();
   final TextEditingController _descriptionTextController = TextEditingController();
   final DeviceStorageController _deviceStorageController = DeviceStorageController();
@@ -57,21 +55,26 @@ class _CreatePetitionPageState extends State<CreatePetitionPage> {
           backgroundColor: Colors.black87,
           body: Container(
               padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
-              child: SingleChildScrollView(
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(187, 0, 0, 0),
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20)
+              child: GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                },
+                child: SingleChildScrollView(
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Color.fromARGB(187, 0, 0, 0),
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                topLeft: Radius.circular(20)
+                            ),
                           ),
-                        ),
-                        child: getPetitionFormCreation(),
-                      )
-                  )
-              ),
+                          child: getPetitionFormCreation(),
+                        )
+                    )
+                ),
+              )
           ),
         ),
         Container(

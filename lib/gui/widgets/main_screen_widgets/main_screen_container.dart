@@ -28,12 +28,7 @@ class MainScreenContainer extends StatelessWidget {
         ),
       ),
       endDrawer: const DrawerMenu(),
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: context.watch<CurrentPageModel>().getCurrentPage(),
-      )
+      body: context.watch<CurrentPageModel>().getCurrentPage(),
     );
   }
 }

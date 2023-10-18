@@ -3,30 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:provider/provider.dart';
 
-
-class DrawerMenu extends StatefulWidget {
+class DrawerMenu extends StatelessWidget {
   const DrawerMenu({super.key});
-
-
-  @override
-  State<DrawerMenu> createState() => _DrawerMenuState();
-}
-
-
-class _DrawerMenuState extends State<DrawerMenu> {
-  int _selectedMenuItemIndex = 0;
-
-
-  List<Widget> menuWidgetsList = [];
-
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedMenuItemIndex = index;
-    });
-  }
-
-
 
 
   @override

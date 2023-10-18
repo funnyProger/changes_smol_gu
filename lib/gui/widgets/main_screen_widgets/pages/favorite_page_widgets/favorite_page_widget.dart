@@ -15,7 +15,7 @@ class FavoritePage extends StatelessWidget {
         decoration: const BoxDecoration(
             color: Colors.black87
         ),
-        padding: const EdgeInsets.only(bottom: 15, left: 8, right: 8),
+        padding: const EdgeInsets.only(left: 8, right: 8),
         child: ClipRRect(
             borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(20),

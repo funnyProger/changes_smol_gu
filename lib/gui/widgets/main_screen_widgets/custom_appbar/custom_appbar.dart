@@ -1,4 +1,4 @@
-import 'package:changes_smol_gu/core/models/current_page_model.dart';
+import 'package:changes_smol_gu/core/models/current_drawer_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -67,7 +67,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
         ),
         leading: leading == null ? null : InkWell(
           onTap: () {
-            context.read<CurrentPageModel>().setCurrentPageIndex(0);
+            context.read<CurrentDrawerPageModel>().setCurrentPageIndex(0);
           },
           borderRadius: BorderRadius.circular(150),
           splashColor: Colors.white10,

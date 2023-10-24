@@ -25,7 +25,7 @@ class FavoriteIcon extends StatelessWidget {
           ),
         ),
         child: context.watch<FavoritesModel>()
-            .isFavoritesContainsPetition(petition.id) == true ?
+            .isFavoritesContainsPetition(petition.id) ?
         LikeButton(
           isLiked: context.watch<FavoritesModel>()
               .isFavoritesContainsPetition(petition.id),

@@ -3,7 +3,6 @@ import 'package:changes_smol_gu/core/controllers/device_storage_controller.dart'
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/snack_bar/snack_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 
 
 class CreatePetitionPage extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:changes_smol_gu/core/models/current_page_model.dart';
+import 'package:changes_smol_gu/core/models/current_drawer_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:provider/provider.dart';
@@ -78,7 +78,7 @@ class DrawerMenu extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        context.read<CurrentPageModel>().setCurrentPageIndex(0);
+                        context.read<CurrentDrawerPageModel>().setCurrentPageIndex(0);
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -117,7 +117,7 @@ class DrawerMenu extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        context.read<CurrentPageModel>().setCurrentPageIndex(1);
+                        context.read<CurrentDrawerPageModel>().setCurrentPageIndex(1);
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -156,7 +156,7 @@ class DrawerMenu extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        context.read<CurrentPageModel>().setCurrentPageIndex(2);
+                        context.read<CurrentDrawerPageModel>().setCurrentPageIndex(2);
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -195,7 +195,7 @@ class DrawerMenu extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        context.read<CurrentPageModel>().setCurrentPageIndex(3);
+                        context.read<CurrentDrawerPageModel>().setCurrentPageIndex(3);
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -234,7 +234,7 @@ class DrawerMenu extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        context.read<CurrentPageModel>().setCurrentPageIndex(4);
+                        context.read<CurrentDrawerPageModel>().setCurrentPageIndex(4);
                         Navigator.pop(context);
                       },
                       child: Container(

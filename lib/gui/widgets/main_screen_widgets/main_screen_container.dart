@@ -1,4 +1,4 @@
-import 'package:changes_smol_gu/core/models/current_page_model.dart';
+import 'package:changes_smol_gu/core/models/current_drawer_page_model.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/drawer_menu/drawer_menu_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,15 +20,10 @@ class MainScreenContainer extends StatelessWidget {
         child: CustomAppbar(
           leading: Icons.home,
           title: 'SmolGU Change.org',
-          ending: Icon(
-            Icons.menu_rounded,
-            color: Colors.white,
-            size: 30
-          ),
         ),
       ),
       endDrawer: const DrawerMenu(),
-      body: context.watch<CurrentPageModel>().getCurrentPage(),
+      body: context.watch<CurrentDrawerPageModel>().getCurrentPage(),
     );
   }
 }

@@ -85,7 +85,4 @@ class _VoiceButtonState extends State<VoiceButton> {
         )
     );
   }
-
-
-
 }

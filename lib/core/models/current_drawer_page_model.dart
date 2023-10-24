@@ -5,11 +5,11 @@ import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/profile_pa
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/settings_page_widgets/settings_page_widget.dart';
 import 'package:flutter/cupertino.dart';
 
-class CurrentPageModel extends ChangeNotifier {
+class CurrentDrawerPageModel extends ChangeNotifier {
   int _currentMenuPageIndex = 0;
 
   final List<Widget> _menuPagesList = [
-    HomePage(),
+    const HomePage(),
     const ProfilePage(),
     const CreatePetitionPage(),
     const MyPetitionPage(),

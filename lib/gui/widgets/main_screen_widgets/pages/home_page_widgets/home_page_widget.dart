@@ -2,11 +2,20 @@ import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_pa
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/favorite_page_widgets/favorite_page_widget.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/search_page_widgets/search_page_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
-  final PersistentTabController _controller = PersistentTabController(initialIndex: 1);
+
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+
+class _HomePageState extends State<HomePage> {
+  int _currentIndex = 1;
 
 
   List<Widget> _homePagesList() {
@@ -18,63 +27,52 @@ class HomePage extends StatelessWidget {
   }
 
 
-  List<PersistentBottomNavBarItem> _itemsList() {
-    return [
-      PersistentBottomNavBarItem(
+  final List<SalomonBottomBarItem> _tabs = [
+    SalomonBottomBarItem(
         icon: const Icon(Icons.search),
-        title: ('Search'),
-        activeColorPrimary: Colors.white,
-        inactiveColorPrimary: Colors.grey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.format_list_bulleted_rounded),
-        title: ('Catalog'),
-        activeColorPrimary: Colors.white,
-        inactiveColorPrimary: Colors.grey,
-      ),
-      PersistentBottomNavBarItem(
+        title: const Text("Search"),
+    ),
+    SalomonBottomBarItem(
+        icon: const Icon(Icons.format_list_bulleted),
+        title: const Text("Catalog"),
+    ),
+    SalomonBottomBarItem(
         icon: const Icon(Icons.favorite),
-        title: ('Favorites'),
-        activeColorPrimary: Colors.white,
-        inactiveColorPrimary: Colors.grey,
-      )
-    ];
-  }
+        title: const Text("Favorites"),
+    ),
+  ];
 
 
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      context,
-      margin: const EdgeInsets.only(left: 50, bottom: 15, right: 50),
-      controller: _controller,
-      screens: _homePagesList(),
-      items: _itemsList(),
-      confineInSafeArea: true,
-      backgroundColor: Colors.black54,
-      handleAndroidBackButtonPress: true,
-      resizeToAvoidBottomInset: true,
-      stateManagement: true,
-      hideNavigationBarWhenKeyboardShows: true,
-      decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-            color: Colors.black54
-        ),
-        colorBehindNavBar: Colors.black87,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          _homePagesList()[_currentIndex],
+          getBottomNavBar()
+        ],
       ),
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: const ItemAnimationProperties(
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
+    );
+  }
+
+
+  Widget getBottomNavBar() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10, left: 60, right: 60),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          color: Colors.black
       ),
-      screenTransitionAnimation: const ScreenTransitionAnimation(
-        animateTabTransition: true,
-        curve: Curves.fastEaseInToSlowEaseOut,
-        duration: Duration(milliseconds: 200),
+      child: SalomonBottomBar(
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
+        itemPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        onTap: (selectedIndex) => setState(() => _currentIndex = selectedIndex),
+        items: _tabs,
       ),
-      navBarStyle: NavBarStyle.style1,
     );
   }
 }

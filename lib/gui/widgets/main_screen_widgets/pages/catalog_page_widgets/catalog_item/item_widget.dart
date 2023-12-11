@@ -15,7 +15,7 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8),
+      padding: const EdgeInsets.only(top: 6),
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
         onTap: () {

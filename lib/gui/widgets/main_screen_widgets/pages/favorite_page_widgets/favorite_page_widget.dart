@@ -1,5 +1,4 @@
 import 'package:changes_smol_gu/core/models/favorites_model.dart';
-import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_page_widgets/catalog_item/item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,41 +12,30 @@ class FavoritePage extends StatelessWidget {
     if(context.watch<FavoritesModel>().getFavoritesList().isNotEmpty) {
       return Container(
         decoration: const BoxDecoration(
-            color: Colors.black87
+            color: Colors.black12
         ),
-        padding: const EdgeInsets.only(left: 8, right: 8),
+        padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
         child: ClipRRect(
             borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20)
             ),
-            child: ListView.builder(
-                itemCount: context
-                    .watch<FavoritesModel>()
-                    .getFavoritesList()
-                    .length + 1,
-                itemBuilder: (context, index) {
-                  if (index == context
-                      .watch<FavoritesModel>()
-                      .getFavoritesList()
-                      .length) {
-                    return const SizedBox(height: 30);
-                  } else {
-                    return Item(petition: context.watch<FavoritesModel>()
-                        .getFavoritesList()[index]);
-                  }
-                }
-            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: context.watch<FavoritesModel>()
+                    .getFavoritesList(),
+              ),
+            )
         )
       );
     } else {
       return Container(
         decoration: const BoxDecoration(
-            color:Colors.black87
+            color:Colors.black12
         ),
         child: Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.only(bottom: 100),
           child: const Text(
               'Favoarites',
               style: TextStyle(
@@ -58,4 +46,7 @@ class FavoritePage extends StatelessWidget {
       );
     }
   }
+
+
+
 }

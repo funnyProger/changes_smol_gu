@@ -58,6 +58,13 @@ dependencies:
   flutter_side_menu: ^0.4.0
   flutter_spinkit: ^5.2.0
   salomon_bottom_bar: ^3.3.2
+  draggable_home: ^1.0.5
+  wp_pivot_flutter: ^1.0.0
+  scrollable_list_tab_scroller: ^0.2.0
+  slide_switcher: ^1.1.2
+  vertical_scrollable_tabview: ^0.1.1
+  flutter_toggle_tab: ^1.4.1
+  http: ^1.1.2
 
 dev_dependencies:
   flutter_test:

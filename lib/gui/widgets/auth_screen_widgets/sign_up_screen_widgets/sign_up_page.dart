@@ -5,6 +5,10 @@ import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/snack_bar/snack_
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/controllers/json_controller.dart';
+import '../../../../core/controllers/shared_preferences_controller.dart';
+import '../../../../data/entities/user.dart';
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -220,10 +224,28 @@ class _SignUpPageState extends State<SignUpPage>
             _nameFocusNode.unfocus();
             state = ButtonState.loading;
           });
-          await Future.delayed(const Duration(milliseconds: 1600));
           if(_inputPhoneNumberDataController.value.text.isNotEmpty
               && _inputPasswordDataController.value.text.isNotEmpty
+              && _inputNameDataController.value.text.isNotEmpty
               && _formKey.currentState!.validate()) {
+
+            String? token = await JsonController().userSignUp(
+              _inputNameDataController.value.text,
+              _inputPhoneNumberDataController.value.text,
+              _inputPasswordDataController.value.text,
+            );
+
+            if(token != null) {
+              setState(() {
+                SharedPreferencesController().setUserPhoneNumber(
+                  _inputPhoneNumberDataController.value.text,
+                );
+                SharedPreferencesController().setToken(token);
+                SharedPreferencesController().setIsUserLoggedIn(true);
+                state = ButtonState.done;
+                context.read<CurrentSignPageModel>().changeValue(Constants.signSuccessPage);
+              });
+            }
             setState(() {
               state = ButtonState.done;
               context.read<CurrentSignPageModel>().changeValue(Constants.signSuccessPage);

@@ -17,20 +17,49 @@ class GetDataFromSharedPreferences extends SharedPreferencesControllerInterface 
 
   @override
   init() async {
-    await setIsDialogShow(false);
+    await setIsUserLoggedIn(false);
   }
 
 
   @override
-  setIsDialogShow(bool value) async {
+  setIsUserLoggedIn(bool value) async {
     SharedPreferences sherPref = await sharedPreferences;
-    await sherPref.setBool('isDialogShow', value);
+    await sherPref.setBool('isUserLoggedIn', value);
   }
 
 
   @override
-  Future getIsDialogShow() async {
+  Future getIsUserLoggedIn() async {
     SharedPreferences sherPref = await sharedPreferences;
-    return sherPref.getBool('isDialogShow');
+    return sherPref.getBool('isUserLoggedIn');
   }
+
+
+  @override
+  setUserPhoneNumber(String phoneNumber) async {
+    SharedPreferences sherPref = await sharedPreferences;
+    await sherPref.setString('userPhoneNumber', phoneNumber);
+  }
+
+
+  @override
+  Future getUserPhoneNumber() async {
+    SharedPreferences sherPref = await sharedPreferences;
+    return sherPref.getString('userPhoneNumber');
+  }
+
+
+  @override
+  setToken(String token) async {
+    SharedPreferences sherPref = await sharedPreferences;
+    await sherPref.setString('token', token);
+  }
+
+
+  @override
+  Future getToken() async {
+    SharedPreferences sherPref = await sharedPreferences;
+    return sherPref.getString('token');
+  }
+
 }

@@ -11,7 +11,7 @@ class Catalog {
 
   static initCatalogList() async {
     try {
-      _catalogList = await _jsonController.getJsonData();
+      _catalogList = await _jsonController.getCatalogData();
     } catch (e) {
       if (kDebugMode) {
         print(e);

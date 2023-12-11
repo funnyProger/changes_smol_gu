@@ -47,52 +47,35 @@ class _CreatePetitionPageState extends State<CreatePetitionPage> {
   @override
   Widget build(BuildContext context) {
     final isStretched = _isAnimating || state == ButtonState.init;
-    return Stack(
-      children: [
-        Scaffold(
-          resizeToAvoidBottomInset: true,
-          backgroundColor: Colors.black87,
-          body: Container(
-              padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
-              child: GestureDetector(
-                onTap: () {
-                  FocusScope.of(context).unfocus();
-                },
-                child: SingleChildScrollView(
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Color.fromARGB(187, 0, 0, 0),
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                topLeft: Radius.circular(20)
-                            ),
-                          ),
-                          child: getPetitionFormCreation(),
-                        )
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.black87,
+      body: Container(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: GestureDetector(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
+            child: SingleChildScrollView(
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 8, bottom: 75),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(187, 0, 0, 0),
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                      child: getPetitionFormCreation(isStretched),
                     )
-                ),
-              )
-          ),
-        ),
-        Container(
-            alignment: Alignment.bottomCenter,
-            padding: const EdgeInsets.only(bottom: 35),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              width: state == ButtonState.init ? 200 : 50,
-              onEnd: () => setState(() => _isAnimating = !_isAnimating),
-              curve: Curves.ease,
-              child: isStretched ? getDefaultButton() : getSmallButton(state),
-            )
-        )
-      ],
+                )
+            ),
+          )
+      ),
     );
   }
 
 
-  Widget getPetitionFormCreation() {
+  Widget getPetitionFormCreation(bool isStretched) {
     return Form(
         key: _formKey,
         child: Column(
@@ -281,6 +264,17 @@ class _CreatePetitionPageState extends State<CreatePetitionPage> {
                 ),
               ),
             ),
+            Container(
+                alignment: Alignment.bottomCenter,
+                padding: const EdgeInsets.only(bottom: 15),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  width: state == ButtonState.init ? 200 : 50,
+                  onEnd: () => setState(() => _isAnimating = !_isAnimating),
+                  curve: Curves.ease,
+                  child: isStretched ? getDefaultButton() : getSmallButton(state),
+                )
+            )
           ],
         )
     );

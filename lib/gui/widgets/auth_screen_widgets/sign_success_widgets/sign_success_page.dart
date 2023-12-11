@@ -1,3 +1,4 @@
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/home_page_widgets/home_page_widget.dart';
 import 'package:flutter/material.dart';
 
 
@@ -41,8 +42,11 @@ class _SignSuccessPageState extends State<SignSuccessPage>
 
     return FutureBuilder(
       future: Future.delayed(const Duration(milliseconds: 2700)).then((value) =>
-          Navigator.pushNamedAndRemoveUntil(
-              context, 'mainScreenContainer', (Route<dynamic> route) => false)
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => const HomePage()),
+          )
       ),
       builder: (context, snapShot) {
         return FadeTransition(

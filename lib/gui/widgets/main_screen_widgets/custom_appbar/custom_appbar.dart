@@ -1,6 +1,6 @@
-import 'package:changes_smol_gu/core/models/current_drawer_page_model.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/home_page_widgets/home_page_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/settings_page_widgets/settings_page_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 
 class CustomAppbar extends StatefulWidget {
@@ -67,7 +67,11 @@ class _CustomAppbarState extends State<CustomAppbar> {
         ),
         leading: leading == null ? null : InkWell(
           onTap: () {
-            context.read<CurrentDrawerPageModel>().setCurrentPageIndex(0);
+            Navigator.pushReplacement(
+            context, 
+            MaterialPageRoute(
+              builder: (BuildContext context) => const HomePage())
+            );
           },
           borderRadius: BorderRadius.circular(150),
           splashColor: Colors.white10,
@@ -89,6 +93,28 @@ class _CustomAppbarState extends State<CustomAppbar> {
             softWrap: true,
           ),
         ),
+        actions: [
+          InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const SettingsPage())
+                );
+              },
+              borderRadius: BorderRadius.circular(150),
+              splashColor: Colors.white10,
+              child: SizedBox(
+                height: 52,
+                width: 52,
+                child: Icon(
+                  ending,
+                  size: 25,
+                  color: Colors.white24,
+                ),
+              )
+          )
+        ],
       ),
     );
   }

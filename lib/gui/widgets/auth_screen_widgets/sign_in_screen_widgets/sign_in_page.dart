@@ -1,9 +1,13 @@
 import 'package:changes_smol_gu/constants/constants.dart';
+import 'package:changes_smol_gu/core/controllers/json_controller.dart';
+import 'package:changes_smol_gu/core/controllers/shared_preferences_controller.dart';
 import 'package:changes_smol_gu/core/models/current_sign_page_model.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/snack_bar/snack_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
+import '../../../../data/entities/user.dart';
+
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -147,14 +151,26 @@ class _SignInPageState extends State<SignInPage>
             _passwordFocusNode.unfocus();
             state = ButtonState.loading;
           });
-          await Future.delayed(const Duration(milliseconds: 1600));
           if(_inputPhoneNumberDataController.value.text.isNotEmpty
           && _inputPasswordDataController.value.text.isNotEmpty
           && _formKey.currentState!.validate()) {
-            setState(() {
-              state = ButtonState.done;
-              context.read<CurrentSignPageModel>().changeValue(Constants.signSuccessPage);
-            });
+
+            String? token = await JsonController().userSignIn(
+              _inputPhoneNumberDataController.value.text,
+              _inputPasswordDataController.value.text,
+            );
+
+            if(token != null) {
+              setState(() {
+                SharedPreferencesController().setUserPhoneNumber(
+                  _inputPhoneNumberDataController.value.text,
+                );
+                SharedPreferencesController().setToken(token);
+                SharedPreferencesController().setIsUserLoggedIn(true);
+                state = ButtonState.done;
+                context.read<CurrentSignPageModel>().changeValue(Constants.signSuccessPage);
+              });
+            }
           } else {
             setState(() {
               showSnackBar(context, 'Invalid data');

@@ -11,7 +11,7 @@ class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 8, bottom: 8),
+      margin: const EdgeInsets.only(top: 6, bottom: 6),
       decoration: BoxDecoration(
           color: Colors.black54,
           borderRadius: BorderRadius.circular(20)
@@ -47,12 +47,38 @@ class InfoPage extends StatelessWidget {
           ),
           Container(
             alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
+            padding: const EdgeInsets.only(left: 10, top: 15, bottom: 5),
+            child: const Text(
+              'Назавние: ',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15
+              ),
+              textDirection: TextDirection.ltr,
+              softWrap: true,
+            ),
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.only(left: 10),
             child: Text(
               petition.title,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 30
+                fontSize: 20
+              ),
+              textDirection: TextDirection.ltr,
+              softWrap: true,
+            ),
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.only(left: 10, top: 10, bottom: 5),
+            child: const Text(
+              'Описание: ',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15
               ),
               textDirection: TextDirection.ltr,
               softWrap: true,
@@ -65,7 +91,7 @@ class InfoPage extends StatelessWidget {
               '${petition.description}\n\n\n\n\n',
               style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 17
+                  fontSize: 13
               ),
               textDirection: TextDirection.ltr,
               softWrap: true,

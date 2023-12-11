@@ -34,7 +34,7 @@ class _SearchPageState extends State<SearchPage> {
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.only(top: 15, left: 6, right: 6, bottom: 8),
+            padding: const EdgeInsets.only(top: 15, left: 5, right: 5, bottom: 8),
             alignment: Alignment.topCenter,
             child: TextFormField(
                 controller: _textEditingController,
@@ -94,14 +94,14 @@ class _SearchPageState extends State<SearchPage> {
               )
           ) : _searchPetitionsList.isNotEmpty ? Expanded(
               child: Container(
-                padding: const EdgeInsets.only(right: 8, left: 8),
+                padding: const EdgeInsets.only(right: 5, left: 5),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: ListView.builder(
                       itemCount: _searchPetitionsList.length + 1,
                       itemBuilder: (context, index) {
                         if(index == _searchPetitionsList.length && _searchPetitionsList.isNotEmpty) {
-                          return const SizedBox(height: 45);
+                          return const SizedBox(height: 75);
                         } else {
                           return Item(petition: _searchPetitionsList[index]);
                         }

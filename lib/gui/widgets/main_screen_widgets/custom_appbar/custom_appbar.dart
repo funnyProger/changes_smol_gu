@@ -1,4 +1,5 @@
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/home_page_widgets/home_page_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/search_page_widgets/search_page_widget.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/settings_page_widgets/settings_page_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -99,7 +100,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => const SettingsPage())
+                        builder: (BuildContext context) => const SearchPage())
                 );
               },
               borderRadius: BorderRadius.circular(150),

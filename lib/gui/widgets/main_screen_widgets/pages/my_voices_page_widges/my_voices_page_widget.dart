@@ -1,16 +1,15 @@
-import 'package:changes_smol_gu/core/models/my_petitions_model.dart';
 import 'package:changes_smol_gu/core/models/my_voices_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
-class MyPetitionsPage extends StatelessWidget {
-  const MyPetitionsPage({super.key});
+class MyVoicesPage extends StatelessWidget {
+  const MyVoicesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
 
-    if(context.watch<MyPetitionsModel>().getMyPetitionsList().isNotEmpty) {
+    if(context.watch<MyVoicesModel>().getMyVoicesList().isNotEmpty) {
       return Container(
           decoration: const BoxDecoration(
               color: Colors.black12
@@ -23,8 +22,8 @@ class MyPetitionsPage extends StatelessWidget {
               ),
               child: SingleChildScrollView(
                 child: Column(
-                  children: context.watch<MyPetitionsModel>()
-                      .getMyPetitionsList(),
+                  children: context.watch<MyVoicesModel>()
+                      .getMyVoicesList(),
                 ),
               )
           )
@@ -38,7 +37,7 @@ class MyPetitionsPage extends StatelessWidget {
           alignment: Alignment.center,
           padding: const EdgeInsets.only(bottom: 100),
           child: const Text(
-              'My Petitions',
+              'My Voices',
               style: TextStyle(
                 color: Colors.grey,
               )

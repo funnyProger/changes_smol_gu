@@ -1,8 +1,14 @@
 import 'dart:io';
 import 'package:changes_smol_gu/core/controllers/device_storage_controller.dart';
+import 'package:changes_smol_gu/core/controllers/shared_preferences_controller.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/snack_bar/snack_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../../core/controllers/json_controller.dart';
+import '../../../../../core/models/user_model.dart';
+import '../../../../../data/entities/petition.dart';
 
 
 class CreatePetitionPage extends StatefulWidget {
@@ -294,15 +300,40 @@ class _CreatePetitionPageState extends State<CreatePetitionPage> {
           setState(() {
             state = ButtonState.loading;
           });
-          await Future.delayed(const Duration(milliseconds: 1600));
           if(_titleTextController.value.text.isNotEmpty
           && _descriptionTextController.value.text.isNotEmpty
           && _formKey.currentState!.validate()
           && _pickedImage != null) {
-            setState(() {
-              showSnackBar(context, 'Петиция добавлена');
-              state = ButtonState.done;
-            });
+            String userPhoneNumber = await SharedPreferencesController().getUserPhoneNumber();
+            /*
+            Каждой созданной петиции в приложении будет присваиваться индекс 0
+            для удобства передачи данных в формате Peititon. Сервер уже будет
+            определять нормальный индекс и при получении списка петиций пользователя
+            сервер будет возвращать петиции с нормальными индексами.
+            В общем это такяа затычка :))
+             */
+            bool isPetitionCreated = await JsonController().createPetition(
+              Petition(
+                id: 0,
+                owner: userPhoneNumber,
+                title: _titleTextController.value.text,
+                image: "_pickedImage",
+                description: _descriptionTextController.value.text,
+              )
+            );
+
+            if(isPetitionCreated) {
+              context.read<UserModel>().updateUserData();
+              setState(() {
+                showSnackBar(context, 'Петиция добавлена');
+                state = ButtonState.done;
+              });
+            } else {
+              setState(() {
+                showSnackBar(context, 'Такая петиция уже существует...');
+                state = ButtonState.done;
+              });
+            }
           } else {
             setState(() {
               showSnackBar(context, 'Заполните все поля правильно');

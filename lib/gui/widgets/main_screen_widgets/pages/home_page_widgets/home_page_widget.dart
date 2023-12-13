@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
         child: CustomAppbar(
           leading: Icons.home,
           title: 'SmolGU Change.org',
-          ending: Icons.settings,
+          ending: Icons.search,
         ),
       ),
       body: Stack(

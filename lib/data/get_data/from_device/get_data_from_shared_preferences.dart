@@ -45,7 +45,8 @@ class GetDataFromSharedPreferences extends SharedPreferencesControllerInterface 
   @override
   Future getUserPhoneNumber() async {
     SharedPreferences sherPref = await sharedPreferences;
-    return sherPref.getString('userPhoneNumber');
+    /*return sherPref.getString('userPhoneNumber');*/
+    return "nosferatu";
   }
 
 

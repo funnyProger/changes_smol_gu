@@ -1,8 +1,10 @@
+import 'package:changes_smol_gu/core/controllers/json_controller.dart';
 import 'package:changes_smol_gu/core/models/favorites_model.dart';
 import 'package:changes_smol_gu/data/entities/petition.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
+import '../../../../core/models/user_model.dart';
 
 
 class FavoriteIcon extends StatelessWidget {
@@ -24,9 +26,7 @@ class FavoriteIcon extends StatelessWidget {
               color: Colors.black
           ),
         ),
-        child: context.watch<FavoritesModel>()
-            .isFavoritesContainsPetition(petition.id) ?
-        LikeButton(
+        child: LikeButton(
           isLiked: context.watch<FavoritesModel>()
               .isFavoritesContainsPetition(petition.id),
           circleSize: 30,
@@ -49,37 +49,20 @@ class FavoriteIcon extends StatelessWidget {
             );
           },
           onTap: (isLiked) async {
-            context.read<FavoritesModel>().favoritesDistributor(petition);
-            return !isLiked;
-          },
-        ) :
-        LikeButton(
-          isLiked: context.watch<FavoritesModel>()
-              .isFavoritesContainsPetition(petition.id),
-          circleSize: 30,
-          animationDuration: const Duration(milliseconds: 600),
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          bubblesColor: const BubblesColor(
-              dotPrimaryColor: Colors.red,
-              dotSecondaryColor: Colors.redAccent
-          ),
-          likeBuilder: (isLiked) {
-            final color = isLiked ? Colors.red : Colors.white70;
-            return Padding(
-              padding: const EdgeInsets.only(left: 3, top: 2),
-              child: Icon(
-                Icons.favorite,
-                size: 27,
-                color: color,
-              ),
-            );
-          },
-          onTap: (isLiked) async {
-            context.read<FavoritesModel>().favoritesDistributor(petition);
+            bool isLikeButtonChanged;
+            if(!isLiked) {
+              isLikeButtonChanged = await JsonController().addPetitionToFavorites(petition);
+            } else {
+              isLikeButtonChanged = await JsonController().removePetitionFromFavorites(petition);
+            }
+            if(isLikeButtonChanged) {
+              context.read<UserModel>().updateUserData();
+            }
             return !isLiked;
           },
         )
     );
   }
+
+
 }

@@ -1,12 +1,13 @@
 import 'package:changes_smol_gu/core/controllers/shared_preferences_controller.dart';
-import 'package:changes_smol_gu/core/models/catalog_model.dart';
 import 'package:changes_smol_gu/core/models/current_sign_page_model.dart';
 import 'package:changes_smol_gu/core/models/favorites_model.dart';
-import 'package:changes_smol_gu/data/singletons/catalog.dart';
-import 'package:changes_smol_gu/gui/widgets/auth_screen_widgets/sign_page_container.dart';
+import 'package:changes_smol_gu/core/models/my_voices_model.dart';
+import 'package:changes_smol_gu/core/models/user_model.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/home_page_widgets/home_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../core/models/my_petitions_model.dart';
 
 void main() async {
   await initAllAppData();
@@ -15,8 +16,10 @@ void main() async {
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => FavoritesModel()),
-          ChangeNotifierProvider(create: (context) => CatalogModel()),
           ChangeNotifierProvider(create: (context) => CurrentSignPageModel()),
+          ChangeNotifierProvider(create: (context) => UserModel()),
+          ChangeNotifierProvider(create: (context) => MyVoicesModel()),
+          ChangeNotifierProvider(create: (context) => MyPetitionsModel()),
         ],
         child: const Application(),
       )

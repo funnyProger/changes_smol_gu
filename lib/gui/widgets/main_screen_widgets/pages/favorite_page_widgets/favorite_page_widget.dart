@@ -2,6 +2,7 @@ import 'package:changes_smol_gu/core/models/favorites_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 class FavoritePage extends StatelessWidget {
   const FavoritePage({super.key});
 
@@ -46,7 +47,4 @@ class FavoritePage extends StatelessWidget {
       );
     }
   }
-
-
-
 }

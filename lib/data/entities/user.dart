@@ -6,6 +6,7 @@ class User {
   final String password;
   final List<Petition> favorites;
   final List<Petition> myPetitions;
+  final List<Petition> myVoices;
 
 
   const User({
@@ -14,6 +15,7 @@ class User {
     required this.password,
     required this.favorites,
     required this.myPetitions,
+    required this.myVoices,
   });
 
 
@@ -26,6 +28,8 @@ class User {
           Petition.fromJson(jsonFavorites))),
       myPetitions: List<Petition>.from(json["myPetitions"].map((jsonMyPetitions) =>
           Petition.fromJson(jsonMyPetitions))),
+      myVoices: List<Petition>.from(json["myVoices"].map((jsonMyPetitions) =>
+          Petition.fromJson(jsonMyPetitions))),
     );
   }
 
@@ -37,6 +41,7 @@ class User {
       "password": password,
       "favorites": List<dynamic>.from(favorites.map((favorite) => favorite.toJson())),
       "myPetitions": List<dynamic>.from(myPetitions.map((myPetition) => myPetition.toJson())),
+      "myVoices": List<dynamic>.from(myPetitions.map((myPetition) => myPetition.toJson())),
     };
   }
 }

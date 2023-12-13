@@ -1,7 +1,10 @@
+import 'package:changes_smol_gu/core/controllers/shared_preferences_controller.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/favorite_page_widgets/favorite_page_widget.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/my_petitions_page_widgets/my_petition_page_widget.dart';
+import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/my_voices_page_widges/my_voices_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
+import '../../../../../core/controllers/json_controller.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -15,10 +18,12 @@ class _ProfilePageWidgetState extends State<ProfilePage> {
   final PageController _pageController = PageController(initialPage: 0);
   int _selectedIndex = 0;
 
+
   List<Widget> _getTabItemList(BuildContext context) {
     return [
       const FavoritePage(),
-      const MyPetitionPage(),
+      const MyPetitionsPage(),
+      const MyVoicesPage(),
     ];
   }
 
@@ -57,7 +62,8 @@ class _ProfilePageWidgetState extends State<ProfilePage> {
                 ),
                 labels: const [
                   'Favorites',
-                  'My Petitions'
+                  'My Petitions',
+                  'My Voices',
                 ],
                 selectedLabelIndex: (index) {
                   setState(() {
@@ -69,21 +75,53 @@ class _ProfilePageWidgetState extends State<ProfilePage> {
                     );
                   });
                 },
-                isScroll:false,
               )
             ),
           ),
           Expanded(
             flex: 80,
-            child: PageView(
-              controller: _pageController,
-              onPageChanged: (newIndex) {
-                setState(() {
-                  _selectedIndex = newIndex;
-                });
+            child: FutureBuilder(
+              future: SharedPreferencesController().getUserPhoneNumber(),
+              builder: (context, snapshot) {
+                if(snapshot.hasData) {
+                  return FutureBuilder(
+                    future: JsonController().getUserDataFromServer(),
+                    builder: (context, snapshot) {
+                      if(snapshot.hasData) {
+                        return PageView(
+                          controller: _pageController,
+                          onPageChanged: (newIndex) {
+                            setState(() {
+                              _selectedIndex = newIndex;
+                            });
+                          },
+                          children: _getTabItemList(context),
+                        );
+                      } else if(snapshot.hasError) {
+                        return Container(
+                          alignment: Alignment.center,
+                          child: const Text(
+                              'Loading error :(',
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 20
+                              )
+                          ),
+                        );
+                      }
+                      return Container(
+                        alignment: Alignment.center,
+                        child: const CircularProgressIndicator(),
+                      );
+                    },
+                  );
+                }
+                return Container(
+                  alignment: Alignment.center,
+                  child: const CircularProgressIndicator(),
+                );
               },
-              children: _getTabItemList(context),
-            ),
+            )
           ),
         ],
       )

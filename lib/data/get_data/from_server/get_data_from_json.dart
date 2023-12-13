@@ -67,8 +67,9 @@ class GetDataFromJson implements JsonControllerInterface {
 
 
   @override
-  Future<User?> getUserData(String phoneNumber) async {
-    String token = await SharedPreferencesController().getToken();
+  Future<User?> getUserData() async {
+    /*String token = await SharedPreferencesController().getToken();
+    String phoneNumber = await SharedPreferencesController().getUserPhoneNumber();
     final response = await http.post(
         Uri.parse(''),
         headers: {
@@ -83,7 +84,226 @@ class GetDataFromJson implements JsonControllerInterface {
       return User.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     } else {
       return null;
+    }*/
+
+    return User(
+      name: "general gaf",
+      phoneNumber: "+79529969153",
+      password: "fjdksl",
+      favorites: [
+        Petition(
+          id: 1,
+          owner: "karl",
+          image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+          title: "Privet",
+          description: "Тут просто какое то описание..."
+        ),
+        Petition(
+            id: 2,
+            owner: "karl",
+            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+            title: "Privet",
+            description: "Тут просто какое то описание..."
+        ),
+        Petition(
+            id: 3,
+            owner: "karl",
+            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+            title: "Privet",
+            description: "Тут просто какое то описание..."
+        ),
+        Petition(
+            id: 4,
+            owner: "karl",
+            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+            title: "Privet",
+            description: "Тут просто какое то описание..."
+        ),
+      ],
+      myPetitions: [
+        Petition(
+            id: 1,
+            owner: "karl",
+            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+            title: "Privet",
+            description: "Тут просто какое то описание..."
+        ),
+      ],
+      myVoices: [
+        Petition(
+            id: 1,
+            owner: "karl",
+            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+            title: "Privet",
+            description: "Тут просто какое то описание..."
+        ),
+        Petition(
+            id: 2,
+            owner: "karl",
+            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+            title: "Privet",
+            description: "Тут просто какое то описание..."
+        ),
+        Petition(
+            id: 3,
+            owner: "karl",
+            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+            title: "Privet",
+            description: "Тут просто какое то описание..."
+        ),
+      ]
+    );
+  }
+
+
+  @override
+  Future<bool> createPetition(Petition petition) async {
+    String token = await SharedPreferencesController().getToken();
+    final response = await http.post(
+        Uri.parse(''),
+        headers: {
+          "token": token
+        },
+        body: {
+          "owner": petition.owner,
+          "image": petition.image,
+          "title": petition.title,
+          "description": petition.description
+        }
+    );
+
+    if(response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
+
+
+  @override
+  Future<bool> addToFavorites(Petition petition) async {
+    print('Добавление в избранные');
+    /*String token = await SharedPreferencesController().getToken();
+    String phoneNumber = await SharedPreferencesController().getUserPhoneNumber();
+    final response = await http.post(
+        Uri.parse(''),
+        headers: {
+          "token": token,
+        },
+        body: {
+          "phoneNumber": phoneNumber,
+          "id": petition.id
+        }
+    );
+
+    if(response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }*/
+    return true;
+  }
+
+
+  @override
+  Future<bool> removeFromFavorites(Petition petition) async {
+    print('Удаление из избранных');
+    /*String token = await SharedPreferencesController().getToken();
+    String phoneNumber = await SharedPreferencesController().getUserPhoneNumber();
+    final response = await http.post(
+        Uri.parse(''),
+        headers: {
+          "token": token,
+        },
+        body: {
+          "phoneNumber": phoneNumber,
+          "id": petition.id
+        }
+    );
+
+    if(response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }*/
+    return true;
+  }
+
+
+  @override
+  Future<bool> addToMyVoices(Petition petition) async {
+    print('Добавление в мои голоса');
+    /*String token = await SharedPreferencesController().getToken();
+    String phoneNumber = await SharedPreferencesController().getUserPhoneNumber();
+    final response = await http.post(
+        Uri.parse(''),
+        headers: {
+          "token": token,
+        },
+        body: {
+          "phoneNumber": phoneNumber,
+          "id": petition.id
+        }
+    );
+
+    if(response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }*/
+    return true;
+  }
+
+
+  @override
+  Future<bool> removeFromMyVoices(Petition petition) async {
+    print('Удаление из моих голосов');
+    /*String token = await SharedPreferencesController().getToken();
+    String phoneNumber = await SharedPreferencesController().getUserPhoneNumber();
+    final response = await http.post(
+        Uri.parse(''),
+        headers: {
+          "token": token,
+        },
+        body: {
+          "phoneNumber": phoneNumber,
+          "id": petition.id
+        }
+    );
+
+    if(response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }*/
+    return true;
+  }
+
+
+  @override
+  Future<bool> removeFromMyPetitions(Petition petition) async {
+    print('Удаление из моих петиций');
+    /*String token = await SharedPreferencesController().getToken();
+    String phoneNumber = await SharedPreferencesController().getUserPhoneNumber();
+    final response = await http.post(
+        Uri.parse(''),
+        headers: {
+          "token": token,
+        },
+        body: {
+          "phoneNumber": phoneNumber,
+          "id": petition.id
+        }
+    );
+
+    if(response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }*/
+    return true;
+  }
+
+
 
 }

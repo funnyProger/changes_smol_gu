@@ -6,15 +6,16 @@ import '../../../../../data/entities/petition.dart';
 import '../pages_rout/to_info_and_back.dart';
 
 
-class FavoriteItemWidget extends StatelessWidget {
-  const FavoriteItemWidget({super.key, required this.petition});
+class MyPetitionsItemWidget extends StatelessWidget {
+  const MyPetitionsItemWidget({super.key, required this.petition});
   final Petition petition;
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
         height: 80,
-        margin: const EdgeInsets.only(bottom: 8, ),
+        margin: const EdgeInsets.only(bottom: 8),
         decoration: BoxDecoration(
             color: Colors.black12,
             borderRadius: BorderRadius.circular(20)
@@ -70,29 +71,31 @@ class FavoriteItemWidget extends StatelessWidget {
                   )
               ),
               Expanded(
-                flex: 7,
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  child: InkWell(
-                    onTap: () async {
-                      bool isItemRemovedFromFavorites = await JsonController().removePetitionFromFavorites(petition);
-                      if(isItemRemovedFromFavorites) {
-                        context.read<UserModel>().updateUserData();
-                      }
-                    },
-                    borderRadius: BorderRadius.circular(30),
-                    splashColor: Colors.transparent,
-                    child: const Icon(
-                      Icons.remove_circle_outline,
-                      color: Colors.grey,
-                      size: 30,
+                  flex: 7,
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: InkWell(
+                      onTap: () async {
+                        bool isItemRemovedFromMyPetitions = await JsonController().removePetitionFromMyPetitions(petition);
+                        if(isItemRemovedFromMyPetitions) {
+                          context.read<UserModel>().updateUserData();
+                        }
+                      },
+                      borderRadius: BorderRadius.circular(30),
+                      splashColor: Colors.transparent,
+                      child: const Icon(
+                        Icons.remove_circle_outline,
+                        color: Colors.grey,
+                        size: 30,
+                      ),
                     ),
-                  ),
-                )
+                  )
               )
             ],
           ),
         )
     );
   }
+
+
 }

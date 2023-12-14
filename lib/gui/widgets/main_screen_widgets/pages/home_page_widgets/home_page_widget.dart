@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(55),
         child: CustomAppbar(

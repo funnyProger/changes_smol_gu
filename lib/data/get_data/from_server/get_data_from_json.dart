@@ -94,6 +94,7 @@ class GetDataFromJson implements JsonControllerInterface {
         Petition(
           id: 1,
           owner: "karl",
+          voices: 100,
           image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
           title: "Privet",
           description: "Тут просто какое то описание..."
@@ -101,6 +102,7 @@ class GetDataFromJson implements JsonControllerInterface {
         Petition(
             id: 2,
             owner: "karl",
+            voices: 131,
             image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
             title: "Privet",
             description: "Тут просто какое то описание..."
@@ -108,6 +110,7 @@ class GetDataFromJson implements JsonControllerInterface {
         Petition(
             id: 3,
             owner: "karl",
+            voices: 329,
             image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
             title: "Privet",
             description: "Тут просто какое то описание..."
@@ -115,6 +118,7 @@ class GetDataFromJson implements JsonControllerInterface {
         Petition(
             id: 4,
             owner: "karl",
+            voices: 723,
             image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
             title: "Privet",
             description: "Тут просто какое то описание..."
@@ -124,6 +128,7 @@ class GetDataFromJson implements JsonControllerInterface {
         Petition(
             id: 1,
             owner: "karl",
+            voices: 78,
             image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
             title: "Privet",
             description: "Тут просто какое то описание..."
@@ -133,6 +138,7 @@ class GetDataFromJson implements JsonControllerInterface {
         Petition(
             id: 1,
             owner: "karl",
+            voices: 447,
             image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
             title: "Privet",
             description: "Тут просто какое то описание..."
@@ -140,6 +146,7 @@ class GetDataFromJson implements JsonControllerInterface {
         Petition(
             id: 2,
             owner: "karl",
+            voices: 200,
             image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
             title: "Privet",
             description: "Тут просто какое то описание..."
@@ -147,6 +154,7 @@ class GetDataFromJson implements JsonControllerInterface {
         Petition(
             id: 3,
             owner: "karl",
+            voices: 177,
             image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
             title: "Privet",
             description: "Тут просто какое то описание..."

@@ -23,28 +23,37 @@ class InfoPageContainer extends StatelessWidget {
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          color: Colors.black87,
-        ),
-        child: Stack(
-          children: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 5),
-              child: SingleChildScrollView(
+          decoration: const BoxDecoration(
+            color: Colors.black87,
+          ),
+          child: Stack(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height,
+                margin: const EdgeInsets.only(left: 6, right: 6, top: 6),
+                decoration: const BoxDecoration(
+                    color: Colors.black54,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20),
+                        topLeft: Radius.circular(20)
+                    )
+                ),
+              ),
+              SingleChildScrollView(
                   child: InfoPage(petition: petition)
               ),
-            ),
-            Container(
-                padding: const EdgeInsets.only(bottom: 40),
-                alignment: Alignment.bottomCenter,
-                child: const VoiceButton(
-                  firstTitle: 'Голосовать',
-                  secondTitle: 'Удалить голос',
-                )
-            )
-          ],
-        )
-      ),
+              Container(
+                  padding: const EdgeInsets.only(bottom: 40),
+                  alignment: Alignment.bottomCenter,
+                  child: VoiceButton(
+                    firstTitle: 'Голосовать',
+                    secondTitle: 'Удалить голос',
+                    petition: petition,
+                  )
+              )
+            ],
+          )
+      )
     );
   }
 }

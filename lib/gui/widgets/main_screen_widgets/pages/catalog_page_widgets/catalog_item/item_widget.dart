@@ -35,10 +35,10 @@ class Item extends StatelessWidget {
                   right: 20,
                   child: FavoriteIcon(petition: petition),
                 ),
-                const Positioned(
+                Positioned(
                   left: 20,
                   top: 20,
-                  child: VoicesIcon(),
+                  child: VoicesIcon(petition: petition),
                 ),
               ],
             ),

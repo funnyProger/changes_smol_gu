@@ -1,15 +1,10 @@
+import 'package:changes_smol_gu/data/entities/petition.dart';
 import 'package:flutter/material.dart';
 
-class VoicesIcon extends StatefulWidget {
-  const VoicesIcon({super.key});
 
-
-  @override
-  State<VoicesIcon> createState() => VoicesIconState();
-}
-
-class VoicesIconState extends State<VoicesIcon> {
-
+class VoicesIcon extends StatelessWidget {
+  const VoicesIcon({super.key, required this.petition});
+  final Petition petition;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +19,9 @@ class VoicesIconState extends State<VoicesIcon> {
               color: Colors.black
           ),
         ),
-        child: const Text(
-          'Голоса: 108',
-          style: TextStyle(
+        child: Text(
+          'Голоса: ${petition.voices.toString()}',
+          style: const TextStyle(
             fontSize: 12,
             color: Colors.white
           )

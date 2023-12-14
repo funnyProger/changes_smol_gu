@@ -1,23 +1,28 @@
+import 'package:changes_smol_gu/core/controllers/json_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../../core/models/my_voices_model.dart';
+import '../../../../core/models/user_model.dart';
+import '../../../../data/entities/petition.dart';
 
 enum ButtonState { init, done }
 
 class VoiceButton extends StatefulWidget {
-  const VoiceButton({super.key, required this.firstTitle, required this.secondTitle});
+  const VoiceButton({super.key, required this.firstTitle, required this.secondTitle, required this.petition});
   final String firstTitle;
   final String secondTitle;
-
+  final Petition petition;
 
   @override
-  State<VoiceButton> createState() => _VoiceButtonState(firstTitle: firstTitle, secondTitle: secondTitle);
+  State<VoiceButton> createState() => _VoiceButtonState(firstTitle: firstTitle, secondTitle: secondTitle, petition: petition);
 }
 
 
 class _VoiceButtonState extends State<VoiceButton> {
-  _VoiceButtonState({required this.firstTitle, required this.secondTitle});
+  _VoiceButtonState({required this.firstTitle, required this.secondTitle, required this.petition});
   ButtonState state = ButtonState.init;
   bool _isAnimating = true;
-  bool _onPressed = false;
+  final Petition petition;
   final String firstTitle;
   final String secondTitle;
 
@@ -42,21 +47,35 @@ class _VoiceButtonState extends State<VoiceButton> {
               color: Colors.grey
           ),
           minimumSize: const Size(200, 47),
-          backgroundColor: _onPressed == true ? Colors.red : Colors.blue,
+          backgroundColor: context.watch<MyVoicesModel>()
+              .isMyVoicesContainsPetition(petition.id)
+              ? Colors.red : Colors.blue,
         ),
         onPressed: () async {
           setState(() {
             state = ButtonState.done;
           });
-          await Future.delayed(const Duration(milliseconds: 1600));
+
+          bool isUserVoted;
+          if(context.read<MyVoicesModel>().isMyVoicesContainsPetition(petition.id)) {
+            isUserVoted = await JsonController().removePetitionFromMyVoices(petition);
+          } else {
+            isUserVoted = await JsonController().addPetitionToMyVoices(petition);
+          }
+          if(isUserVoted) {
+            context.read<UserModel>().updateUserData();
+          }
+
+          await Future.delayed(Duration(milliseconds: 1200));
           setState(() {
-            _onPressed = !_onPressed;
             state = ButtonState.init;
           });
         },
         child: FittedBox(
           child: Text(
-              _onPressed == true ? secondTitle : firstTitle,
+              context.watch<MyVoicesModel>()
+                  .isMyVoicesContainsPetition(petition.id)
+                  ? secondTitle : firstTitle,
               style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white

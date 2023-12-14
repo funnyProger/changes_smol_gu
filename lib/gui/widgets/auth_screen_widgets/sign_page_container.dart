@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
-class SignInPageContainer extends StatelessWidget {
-  const SignInPageContainer({super.key});
+class SignPageContainer extends StatelessWidget {
+  const SignPageContainer({super.key});
 
 
   @override

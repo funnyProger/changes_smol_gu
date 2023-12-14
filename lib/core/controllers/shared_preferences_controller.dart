@@ -7,7 +7,6 @@ abstract class SharedPreferencesControllerInterface {
   getUserPhoneNumber();
   setToken(String token);
   getToken();
-  init();
 }
 
 
@@ -42,10 +41,5 @@ class SharedPreferencesController {
 
   Future getToken() async {
     return _controller.getToken();
-  }
-
-
-  void initSharedPreferences() {
-    _controller.init();
   }
 }

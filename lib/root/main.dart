@@ -3,14 +3,16 @@ import 'package:changes_smol_gu/core/models/current_sign_page_model.dart';
 import 'package:changes_smol_gu/core/models/favorites_model.dart';
 import 'package:changes_smol_gu/core/models/my_voices_model.dart';
 import 'package:changes_smol_gu/core/models/user_model.dart';
+import 'package:changes_smol_gu/gui/widgets/auth_screen_widgets/sign_page_container.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/home_page_widgets/home_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../core/models/my_petitions_model.dart';
 
+
 void main() async {
-  await initAllAppData();
+  WidgetsFlutterBinding.ensureInitialized();
+  bool isUserLoggedIn = await SharedPreferencesController().getIsUserLoggedIn();
 
   runApp(
       MultiProvider(
@@ -21,29 +23,24 @@ void main() async {
           ChangeNotifierProvider(create: (context) => MyVoicesModel()),
           ChangeNotifierProvider(create: (context) => MyPetitionsModel()),
         ],
-        child: const Application(),
+        child: Application(isUserLoggedIn: isUserLoggedIn),
       )
   );
 }
 
 class Application extends StatelessWidget {
-  const Application({super.key});
+  const Application({super.key, required this.isUserLoggedIn});
+  final bool isUserLoggedIn;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const HomePage(),
+      home: isUserLoggedIn ? const HomePage() : const SignPageContainer(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Poppins-Light'
       ),
     );
   }
-}
-
-
-initAllAppData() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferencesController().initSharedPreferences();
 }
 

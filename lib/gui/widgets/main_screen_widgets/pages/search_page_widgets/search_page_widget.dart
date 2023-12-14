@@ -89,7 +89,7 @@ class _SearchPageState extends State<SearchPage> {
                           ),
                           onChanged: (query) {
                             searchEngine(context, query, snapshot.data!);
-                          }
+                          },
                       ),
                     ),
                     _textEditingController.value.text.isEmpty ? Expanded(

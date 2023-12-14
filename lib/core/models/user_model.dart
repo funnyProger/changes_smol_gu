@@ -34,7 +34,7 @@ class UserModel extends ChangeNotifier {
   }
 
 
-  getCurrentUserData() {
+  User getCurrentUserData() {
     return _currentUserData;
   }
 

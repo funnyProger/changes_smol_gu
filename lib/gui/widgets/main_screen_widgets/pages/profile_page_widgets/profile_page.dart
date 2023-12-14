@@ -4,7 +4,10 @@ import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/my_petitio
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/my_voices_page_widges/my_voices_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
-import '../../../../../core/controllers/json_controller.dart';
+import 'package:provider/provider.dart';
+import '../../../../../core/models/user_model.dart';
+import '../../../../../data/entities/user.dart';
+import '../../../auth_screen_widgets/sign_page_container.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -29,6 +32,13 @@ class _ProfilePageWidgetState extends State<ProfilePage> {
 
 
   @override
+  void initState() {
+    context.read<UserModel>().updateUserData();
+    super.initState();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
@@ -38,7 +48,7 @@ class _ProfilePageWidgetState extends State<ProfilePage> {
         children: [
           Expanded(
             flex: 10,
-            child: userInfo(),
+            child: userInfo(context.read<UserModel>().getCurrentUserData()),
           ),
           Expanded(
             flex: 8,
@@ -48,7 +58,7 @@ class _ProfilePageWidgetState extends State<ProfilePage> {
               child: FlutterToggleTab(
                 width: 90, // width in percent
                 borderRadius: 30,
-                height: 47,
+                height: 40,
                 selectedIndex: _selectedIndex,
                 selectedBackgroundColors: const [Colors.white],
                 unSelectedBackgroundColors: const [Colors.white12],
@@ -80,72 +90,51 @@ class _ProfilePageWidgetState extends State<ProfilePage> {
           ),
           Expanded(
             flex: 80,
-            child: FutureBuilder(
-              future: SharedPreferencesController().getUserPhoneNumber(),
-              builder: (context, snapshot) {
-                if(snapshot.hasData) {
-                  return FutureBuilder(
-                    future: JsonController().getUserDataFromServer(),
-                    builder: (context, snapshot) {
-                      if(snapshot.hasData) {
-                        return PageView(
-                          controller: _pageController,
-                          onPageChanged: (newIndex) {
-                            setState(() {
-                              _selectedIndex = newIndex;
-                            });
-                          },
-                          children: _getTabItemList(context),
-                        );
-                      } else if(snapshot.hasError) {
-                        return Container(
-                          alignment: Alignment.center,
-                          child: const Text(
-                              'Loading error :(',
-                              style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 20
-                              )
-                          ),
-                        );
-                      }
-                      return Container(
-                        alignment: Alignment.center,
-                        child: const CircularProgressIndicator(),
-                      );
-                    },
-                  );
-                }
-                return Container(
-                  alignment: Alignment.center,
-                  child: const CircularProgressIndicator(),
-                );
-              },
-            )
+            child: getProfilePages(context)
           ),
         ],
       )
     );
   }
 
-  Widget userInfo() {
+  Widget getProfilePages(BuildContext context) {
+    if(context.watch<UserModel>().getCurrentUserData().phoneNumber != '') {
+      return PageView(
+        controller: _pageController,
+        onPageChanged: (newIndex) {
+          setState(() {
+            _selectedIndex = newIndex;
+          });
+        },
+        children: _getTabItemList(context),
+      );
+    } else {
+      return Container(
+        alignment: Alignment.center,
+        child: const CircularProgressIndicator(),
+      );
+    }
+  }
+
+
+  Widget userInfo(User currentUserData) {
     return Container(
       height: 80,
       alignment: Alignment.center,
       child: Row(
         children: [
           Expanded(
-            flex: 10,
+            flex: 13,
             child: Container(
               alignment: Alignment.center,
-              child: const CircleAvatar(
+              child: CircleAvatar(
                 backgroundColor: Colors.blue,
                 radius: 25,
                 child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                        'n',
-                        style: TextStyle(
+                        currentUserData.name[0],
+                        style: const TextStyle(
                             color: Colors.grey,
                             fontSize: 20
                         )
@@ -164,9 +153,9 @@ class _ProfilePageWidgetState extends State<ProfilePage> {
                     flex: 1,
                     child: Container(
                       alignment: Alignment.bottomLeft,
-                      child: const Text(
-                        'Name: nosferatu',
-                        style: TextStyle(
+                      child: Text(
+                        'Name: ${currentUserData.name}',
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 17
                         ),
@@ -178,20 +167,42 @@ class _ProfilePageWidgetState extends State<ProfilePage> {
                     child: Container(
                       alignment: Alignment.topLeft,
                       padding: const EdgeInsets.only(top: 2),
-                      child: const Text(
-                        'Email: funbogdan2003@gmail.com',
-                        style: TextStyle(
+                      child: Text(
+                        'Phone number: ${currentUserData.phoneNumber}',
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 12
                         ),
                       ),
-
                     ),
                   ),
                 ],
               ),
             ),
-          )
+          ),
+          Expanded(
+            flex: 10,
+            child: Container(
+              alignment: Alignment.center,
+              child: InkWell(
+                onTap: () async {
+                  SharedPreferencesController().setIsUserLoggedIn(false);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const SignPageContainer())
+                  );
+                },
+                borderRadius: BorderRadius.circular(100),
+                splashColor: Colors.white,
+                child: const Icon(
+                  Icons.exit_to_app,
+                  size: 30,
+                  color: Colors.white,
+                ),
+              )
+            ),
+          ),
         ],
       ),
     );

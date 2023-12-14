@@ -246,10 +246,6 @@ class _SignUpPageState extends State<SignUpPage>
                 context.read<CurrentSignPageModel>().changeValue(Constants.signSuccessPage);
               });
             }
-            setState(() {
-              state = ButtonState.done;
-              context.read<CurrentSignPageModel>().changeValue(Constants.signSuccessPage);
-            });
           } else {
             setState(() {
               showSnackBar(context, 'Invalid data');

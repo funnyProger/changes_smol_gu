@@ -316,6 +316,7 @@ class _CreatePetitionPageState extends State<CreatePetitionPage> {
               Petition(
                 id: 0,
                 owner: userPhoneNumber,
+                voices: 0,
                 title: _titleTextController.value.text,
                 image: "_pickedImage",
                 description: _descriptionTextController.value.text,

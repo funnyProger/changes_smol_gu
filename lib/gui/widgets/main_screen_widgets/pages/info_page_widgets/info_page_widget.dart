@@ -11,10 +11,13 @@ class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 6, bottom: 6),
-      decoration: BoxDecoration(
-          color: Colors.black54,
-          borderRadius: BorderRadius.circular(20)
+      padding: const EdgeInsets.only(left: 6, right: 6, top: 6),
+      decoration: const BoxDecoration(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20)
+          )
       ),
       child: Column(
         children: [
@@ -38,10 +41,10 @@ class InfoPage extends StatelessWidget {
                 top: 20,
                 child: FavoriteIcon(petition: petition)
               ),
-              const Positioned(
-                  left: 20,
-                  top: 20,
-                  child: VoicesIcon()
+              Positioned(
+                left: 20,
+                top: 20,
+                child: VoicesIcon(petition: petition),
               )
             ]
           ),

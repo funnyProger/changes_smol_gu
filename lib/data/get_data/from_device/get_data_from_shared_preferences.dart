@@ -16,12 +16,6 @@ class GetDataFromSharedPreferences extends SharedPreferencesControllerInterface 
 
 
   @override
-  init() async {
-    await setIsUserLoggedIn(false);
-  }
-
-
-  @override
   setIsUserLoggedIn(bool value) async {
     SharedPreferences sherPref = await sharedPreferences;
     await sherPref.setBool('isUserLoggedIn', value);
@@ -31,7 +25,7 @@ class GetDataFromSharedPreferences extends SharedPreferencesControllerInterface 
   @override
   Future getIsUserLoggedIn() async {
     SharedPreferences sherPref = await sharedPreferences;
-    return sherPref.getBool('isUserLoggedIn');
+    return sherPref.getBool('isUserLoggedIn') ?? false;
   }
 
 

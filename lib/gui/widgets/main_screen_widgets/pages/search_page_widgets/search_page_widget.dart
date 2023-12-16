@@ -1,3 +1,4 @@
+import 'package:auto_animated_list/auto_animated_list.dart';
 import 'package:changes_smol_gu/data/entities/petition.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_page_widgets/catalog_item/item_widget.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class _SearchPageState extends State<SearchPage> {
         ),
       ),
       body: FutureBuilder(
-          future: JsonController().getCatalogData(),
+          future: JsonController().getCatalogData('default'),
           builder: (context, snapshot) {
             if(snapshot.hasData) {
               return Container(
@@ -108,16 +109,19 @@ class _SearchPageState extends State<SearchPage> {
                             padding: const EdgeInsets.only(right: 5, left: 5),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
-                              child: ListView.builder(
-                                  itemCount: _searchPetitionsList.length + 1,
-                                  itemBuilder: (context, index) {
-                                    if(index == _searchPetitionsList.length && _searchPetitionsList.isNotEmpty) {
-                                      return const SizedBox(height: 7);
-                                    } else {
-                                      return Item(petition: _searchPetitionsList[index]);
-                                    }
+                              child: AutoAnimatedList<Petition>(
+                                items: _searchPetitionsList,
+                                itemBuilder: (context, petition, index, animation) {
+                                  if(index == _searchPetitionsList.length - 1 && _searchPetitionsList.isNotEmpty) {
+                                    return const SizedBox(height: 7);
+                                  } else {
+                                    return SizeFadeTransition(
+                                        animation: animation,
+                                        child: Item(petition: petition)
+                                    );
                                   }
-                              ),
+                                },
+                              )
                             )
                         )
                     ) : Expanded(

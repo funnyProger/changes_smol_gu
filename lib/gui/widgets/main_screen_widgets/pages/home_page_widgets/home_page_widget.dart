@@ -1,7 +1,9 @@
+import 'package:changes_smol_gu/core/models/current_home_page_model.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_page_widgets/catalog_page_widget.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/create_petition_page_widgets/create_petition_page_widget.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/profile_page_widgets/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import '../../custom_appbar/custom_appbar.dart';
 
@@ -14,7 +16,6 @@ class HomePage extends StatefulWidget {
 
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 1;
 
 
   List<Widget> _homePagesList() {
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage> {
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          _homePagesList()[_currentIndex],
+          _homePagesList()[context.watch<CurrentHomePageModel>().getCurrentPageIndex()],
           getBottomNavBar()
         ],
       ),
@@ -73,11 +74,12 @@ class _HomePageState extends State<HomePage> {
           color: Colors.black
       ),
       child: SalomonBottomBar(
-        currentIndex: _currentIndex,
+        currentIndex: context.watch<CurrentHomePageModel>().getCurrentPageIndex(),
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
         itemPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        onTap: (selectedIndex) => setState(() => _currentIndex = selectedIndex),
+        onTap: (selectedIndex) => setState(() =>
+        context.read<CurrentHomePageModel>().setCurrentPageIndex(selectedIndex)),
         items: _tabs,
       ),
     );

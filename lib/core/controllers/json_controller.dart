@@ -4,7 +4,7 @@ import '../../data/entities/user.dart';
 
 
 abstract class JsonControllerInterface {
-  getAllPetitions();
+  getAllPetitions(String catalogMode);
   signIn(String phoneNumber, String password);
   signUp(String name, String phoneNumber, String password);
   getUserData();
@@ -21,8 +21,8 @@ class JsonController {
   final JsonControllerInterface _jsonControllerInterface = GetDataFromJson();
 
 
-  Future<List<Petition>> getCatalogData() async {
-    return _jsonControllerInterface.getAllPetitions();
+  Future<List<Petition>> getCatalogData(String catalogMode) async {
+    return _jsonControllerInterface.getAllPetitions(catalogMode);
   }
 
 

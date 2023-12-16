@@ -1,4 +1,5 @@
 import 'package:changes_smol_gu/core/controllers/shared_preferences_controller.dart';
+import 'package:changes_smol_gu/core/models/current_home_page_model.dart';
 import 'package:changes_smol_gu/core/models/current_sign_page_model.dart';
 import 'package:changes_smol_gu/core/models/favorites_model.dart';
 import 'package:changes_smol_gu/core/models/my_voices_model.dart';
@@ -22,6 +23,7 @@ void main() async {
           ChangeNotifierProvider(create: (context) => UserModel()),
           ChangeNotifierProvider(create: (context) => MyVoicesModel()),
           ChangeNotifierProvider(create: (context) => MyPetitionsModel()),
+          ChangeNotifierProvider(create: (context) => CurrentHomePageModel())
         ],
         child: Application(isUserLoggedIn: isUserLoggedIn),
       )

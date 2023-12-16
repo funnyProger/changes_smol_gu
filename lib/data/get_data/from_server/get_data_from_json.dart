@@ -13,7 +13,27 @@ class GetDataFromJson implements JsonControllerInterface {
 
 
   @override
-  Future<List<Petition>> getAllPetitions() async {
+  Future<List<Petition>> getAllPetitions(String catalogMode) async {
+    /*String token = await SharedPreferencesController().getToken();
+    final response = await http.post(
+        Uri.parse(''),
+        headers: {
+          "token": token
+        },
+        body: {
+          "mode": catalogMode
+        }
+
+    );
+
+    if(response.statusCode == 200) {
+      final jsonData = json.decode(response.body) as List<dynamic>;
+      return jsonData.map((element) => Petition.fromJson(element)).toList();
+    } else {
+      return [];
+    }
+   */
+
     try {
       final fileContent = await rootBundle.loadString('assets/petitions.json');
       final jsonData = json.decode(fileContent) as List<dynamic>;

@@ -65,6 +65,11 @@ dependencies:
   vertical_scrollable_tabview: ^0.1.1
   flutter_toggle_tab: ^1.4.1
   http: ^1.1.2
+  swipe_refresh: ^1.0.2
+  loading_indicator: ^3.1.1
+  auto_animated_list: ^1.0.4
+  animated_custom_dropdown: ^2.0.0
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:

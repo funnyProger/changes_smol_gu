@@ -1,7 +1,9 @@
+import 'package:changes_smol_gu/core/models/current_home_page_model.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/home_page_widgets/home_page_widget.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/search_page_widgets/search_page_widget.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/settings_page_widgets/settings_page_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 class CustomAppbar extends StatefulWidget {
@@ -68,11 +70,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
         ),
         leading: leading == null ? null : InkWell(
           onTap: () {
-            Navigator.pushReplacement(
-            context, 
-            MaterialPageRoute(
-              builder: (BuildContext context) => const HomePage())
-            );
+            context.read<CurrentHomePageModel>().setCurrentPageIndex(1);
           },
           borderRadius: BorderRadius.circular(150),
           splashColor: Colors.white10,

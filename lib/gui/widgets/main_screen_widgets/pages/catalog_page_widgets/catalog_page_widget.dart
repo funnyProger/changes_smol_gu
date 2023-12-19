@@ -28,11 +28,11 @@ class _CatalogPageState extends State<CatalogPage> {
 
 
 
-  Future getCatalogList(bool getNewList) async {
+  Future getCatalogList(bool getNewList, {String catalogMode = 'default'}) async {
     await Future.delayed(const Duration(milliseconds: 1200));
     List<Petition> newCatalogPart;
     if(_selectedValue == null) {
-      newCatalogPart = await JsonController().getCatalogData('default');
+      newCatalogPart = await JsonController().getCatalogData(catalogMode);
     } else {
       newCatalogPart = await JsonController().getCatalogData(_selectedValue!);
     }
@@ -54,7 +54,7 @@ class _CatalogPageState extends State<CatalogPage> {
 
   @override
   void initState() {
-    context.read<UserModel>().updateUserData();
+    context.read<UserModel>().updateFavorites();
     getCatalogList(true);
     super.initState();
   }
@@ -79,10 +79,54 @@ class _CatalogPageState extends State<CatalogPage> {
               floating: true,
               toolbarHeight: 55,
               actions: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(right: 12, left: 12),
-                  child: getDropDownMenu(),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 350,
+                        padding: const EdgeInsets.only(right: 6, left: 12),
+                        child: getDropDownMenu(),
+                      ),
+                      Container(
+                        width: 56,
+                        padding: const EdgeInsets.only(
+                          top: 6,
+                          bottom: 6,
+                          right: 12,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                if(_selectedValue != null) {
+                                  setState(() {
+                                    getCatalogList(true, catalogMode: _selectedValue!);
+                                  });
+                                } else {
+                                  setState(() {
+                                    getCatalogList(true);
+                                  });
+                                }
+                              });
+                            },
+                            borderRadius: BorderRadius.circular(100),
+                            child: Container(
+                              alignment: Alignment.center,
+                              decoration: const BoxDecoration(
+                                  color: Colors.black87
+                              ),
+                              child: const Icon(
+                                Icons.arrow_upward,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        )
+                      )
+                    ],
+                  ),
                 )
               ],
               forceElevated: innerBoxIsScrolled,
@@ -177,8 +221,8 @@ class _CatalogPageState extends State<CatalogPage> {
         onChanged: (value) {
           setState(() {
             _selectedValue = value;
+            getCatalogList(true, catalogMode: _selectedValue!);
           });
-          getCatalogList(true);
         },
         menuItemStyleData: const MenuItemStyleData(
           height: 36

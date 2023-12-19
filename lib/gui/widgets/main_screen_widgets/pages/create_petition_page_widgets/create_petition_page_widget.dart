@@ -324,7 +324,7 @@ class _CreatePetitionPageState extends State<CreatePetitionPage> {
             );
 
             if(isPetitionCreated) {
-              context.read<UserModel>().updateUserData();
+              context.read<UserModel>().updateMyPetitions();
               setState(() {
                 showSnackBar(context, 'Петиция добавлена');
                 state = ButtonState.done;

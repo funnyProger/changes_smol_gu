@@ -77,7 +77,7 @@ class FavoriteItemWidget extends StatelessWidget {
                     onTap: () async {
                       bool isItemRemovedFromFavorites = await JsonController().removePetitionFromFavorites(petition);
                       if(isItemRemovedFromFavorites) {
-                        context.read<UserModel>().updateUserData();
+                        context.read<UserModel>().updateFavorites();
                       }
                     },
                     borderRadius: BorderRadius.circular(30),

@@ -56,7 +56,7 @@ class FavoriteIcon extends StatelessWidget {
               isLikeButtonChanged = await JsonController().removePetitionFromFavorites(petition);
             }
             if(isLikeButtonChanged) {
-              context.read<UserModel>().updateUserData();
+              context.read<UserModel>().updateFavorites();
             }
             return !isLiked;
           },

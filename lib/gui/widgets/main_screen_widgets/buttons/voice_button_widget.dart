@@ -63,7 +63,7 @@ class _VoiceButtonState extends State<VoiceButton> {
             isUserVoted = await JsonController().addPetitionToMyVoices(petition);
           }
           if(isUserVoted) {
-            context.read<UserModel>().updateUserData();
+            context.read<UserModel>().updateMyVoices();
           }
 
           await Future.delayed(Duration(milliseconds: 1200));

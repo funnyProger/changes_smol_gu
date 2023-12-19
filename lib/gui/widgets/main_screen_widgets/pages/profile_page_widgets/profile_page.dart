@@ -25,7 +25,7 @@ class _ProfilePageWidgetState extends State<ProfilePage> {
   List<Widget> _getTabItemList(BuildContext context) {
     return [
       const FavoritePage(),
-      const MyPetitionsPage(),
+      MyPetitionsPage(),
       const MyVoicesPage(),
     ];
   }
@@ -34,6 +34,7 @@ class _ProfilePageWidgetState extends State<ProfilePage> {
   @override
   void initState() {
     context.read<UserModel>().updateUserData();
+    print("ИНИТ");
     super.initState();
   }
 

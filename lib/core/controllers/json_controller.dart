@@ -8,6 +8,9 @@ abstract class JsonControllerInterface {
   signIn(String phoneNumber, String password);
   signUp(String name, String phoneNumber, String password);
   getUserData();
+  getFavorites();
+  getUserPetition();
+  getUserVoices();
   createPetition(Petition petition);
   addToFavorites(Petition petition);
   removeFromFavorites(Petition petition);
@@ -39,6 +42,21 @@ class JsonController {
 
   Future<User?> getUserDataFromServer() async {
     return _jsonControllerInterface.getUserData();
+  }
+
+
+  Future<List<Petition>> getUserFavoritesData() async {
+    return _jsonControllerInterface.getFavorites();
+  }
+
+
+  Future<List<Petition>>  getUserPetitionData() async {
+    return _jsonControllerInterface.getUserPetition();
+  }
+
+
+  Future<List<Petition>> getUserVoicesData() async {
+    return _jsonControllerInterface.getUserVoices();
   }
 
 

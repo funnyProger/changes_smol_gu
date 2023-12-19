@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 import '../../entities/user.dart';
 
 
@@ -87,6 +86,137 @@ class GetDataFromJson implements JsonControllerInterface {
 
 
   @override
+  Future<List<Petition>> getFavorites() async {
+    /*String token = await SharedPreferencesController().getToken();
+    final response = await http.get(
+        Uri.parse(''),
+        headers: {
+          "token": token
+        },
+    );
+
+    if(response.statusCode == 200) {
+      final jsonData = json.decode(response.body) as List<dynamic>;
+      return jsonData.map((element) => Petition.fromJson(element)).toList();
+    } else {
+      return [];
+    }*/
+
+
+    return [
+      Petition(
+          id: 1,
+          owner: "karl",
+          voices: 100,
+          image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+          title: "Privet",
+          description: "Тут просто какое то описание..."
+      ),
+      Petition(
+          id: 2,
+          owner: "karl",
+          voices: 131,
+          image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+          title: "Privet",
+          description: "Тут просто какое то описание..."
+      ),
+      Petition(
+          id: 3,
+          owner: "karl",
+          voices: 329,
+          image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+          title: "Privet",
+          description: "Тут просто какое то описание..."
+      ),
+      Petition(
+          id: 4,
+          owner: "karl",
+          voices: 723,
+          image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+          title: "Privet",
+          description: "Тут просто какое то описание..."
+      ),
+    ];
+  }
+
+
+  @override
+  Future<List<Petition>> getUserPetition() async {
+    /*String token = await SharedPreferencesController().getToken();
+    final response = await http.get(
+        Uri.parse(''),
+        headers: {
+          "token": token
+        },
+    );
+
+    if(response.statusCode == 200) {
+      final jsonData = json.decode(response.body) as List<dynamic>;
+      return jsonData.map((element) => Petition.fromJson(element)).toList();
+    } else {
+      return [];
+    }*/
+
+    return [
+      Petition(
+          id: 1,
+          owner: "karl",
+          voices: 78,
+          image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+          title: "Privet",
+          description: "Тут просто какое то описание..."
+      ),
+    ];
+  }
+
+
+  @override
+  Future<List<Petition>> getUserVoices() async {
+    /*String token = await SharedPreferencesController().getToken();
+    final response = await http.get(
+        Uri.parse(''),
+        headers: {
+          "token": token
+        },
+    );
+
+    if(response.statusCode == 200) {
+      final jsonData = json.decode(response.body) as List<dynamic>;
+      return jsonData.map((element) => Petition.fromJson(element)).toList();
+    } else {
+      return [];
+    }*/
+
+    return [
+      Petition(
+          id: 1,
+          owner: "karl",
+          voices: 447,
+          image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+          title: "Privet",
+          description: "Тут просто какое то описание..."
+      ),
+      Petition(
+          id: 2,
+          owner: "karl",
+          voices: 200,
+          image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+          title: "Privet",
+          description: "Тут просто какое то описание..."
+      ),
+      Petition(
+          id: 3,
+          owner: "karl",
+          voices: 177,
+          image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
+          title: "Privet",
+          description: "Тут просто какое то описание..."
+      ),
+    ];
+  }
+
+
+  @override
   Future<User?> getUserData() async {
     /*String token = await SharedPreferencesController().getToken();
     String phoneNumber = await SharedPreferencesController().getUserPhoneNumber();
@@ -106,80 +236,10 @@ class GetDataFromJson implements JsonControllerInterface {
       return null;
     }*/
 
-    return User(
+    return const User(
       name: "general gaf",
       phoneNumber: "+79529969153",
       password: "fjdksl",
-      favorites: [
-        Petition(
-          id: 1,
-          owner: "karl",
-          voices: 100,
-          image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
-          title: "Privet",
-          description: "Тут просто какое то описание..."
-        ),
-        Petition(
-            id: 2,
-            owner: "karl",
-            voices: 131,
-            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
-            title: "Privet",
-            description: "Тут просто какое то описание..."
-        ),
-        Petition(
-            id: 3,
-            owner: "karl",
-            voices: 329,
-            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
-            title: "Privet",
-            description: "Тут просто какое то описание..."
-        ),
-        Petition(
-            id: 4,
-            owner: "karl",
-            voices: 723,
-            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
-            title: "Privet",
-            description: "Тут просто какое то описание..."
-        ),
-      ],
-      myPetitions: [
-        Petition(
-            id: 1,
-            owner: "karl",
-            voices: 78,
-            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
-            title: "Privet",
-            description: "Тут просто какое то описание..."
-        ),
-      ],
-      myVoices: [
-        Petition(
-            id: 1,
-            owner: "karl",
-            voices: 447,
-            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
-            title: "Privet",
-            description: "Тут просто какое то описание..."
-        ),
-        Petition(
-            id: 2,
-            owner: "karl",
-            voices: 200,
-            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
-            title: "Privet",
-            description: "Тут просто какое то описание..."
-        ),
-        Petition(
-            id: 3,
-            owner: "karl",
-            voices: 177,
-            image: "https://i.pinimg.com/564x/f9/db/b6/f9dbb6b60467159e320bc3cc8474bcf0.jpg",
-            title: "Privet",
-            description: "Тут просто какое то описание..."
-        ),
-      ]
     );
   }
 

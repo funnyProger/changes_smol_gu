@@ -2,9 +2,27 @@ import 'package:changes_smol_gu/core/models/my_voices_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../core/models/user_model.dart';
 
-class MyVoicesPage extends StatelessWidget {
+
+class MyVoicesPage extends StatefulWidget {
   const MyVoicesPage({super.key});
+
+
+  @override
+  State<MyVoicesPage> createState() => _MyVoicesPageState();
+}
+
+
+class _MyVoicesPageState extends State<MyVoicesPage> {
+
+  @override
+  void initState() {
+    context.read<UserModel>().updateMyVoices();
+    print("МОИ ГОЛОСА");
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {

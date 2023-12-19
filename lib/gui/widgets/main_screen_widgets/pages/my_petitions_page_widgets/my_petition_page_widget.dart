@@ -1,11 +1,26 @@
 import 'package:changes_smol_gu/core/models/my_petitions_model.dart';
-import 'package:changes_smol_gu/core/models/my_voices_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../core/models/user_model.dart';
 
-class MyPetitionsPage extends StatelessWidget {
-  const MyPetitionsPage({super.key});
+
+class MyPetitionsPage extends StatefulWidget {
+
+
+  @override
+  State<MyPetitionsPage> createState() => _MyPetitionsPageState();
+}
+
+
+class _MyPetitionsPageState extends State<MyPetitionsPage> {
+
+
+  @override
+  void initState() {
+    context.read<UserModel>().updateMyPetitions();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

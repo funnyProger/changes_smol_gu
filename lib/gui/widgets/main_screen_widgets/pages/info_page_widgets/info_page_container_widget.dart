@@ -1,14 +1,32 @@
+import 'package:changes_smol_gu/core/models/user_model.dart';
 import 'package:changes_smol_gu/data/entities/petition.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/buttons/voice_button_widget.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/custom_appbar/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'info_page_widget.dart';
 
-
-class InfoPageContainer extends StatelessWidget {
+class InfoPageContainer extends StatefulWidget {
   const InfoPageContainer({super.key, required this.petition});
   final Petition petition;
 
+
+  @override
+  State<InfoPageContainer> createState() => _InfoPageContainerState(petition: petition);
+}
+
+
+class _InfoPageContainerState extends State<InfoPageContainer> {
+  _InfoPageContainerState({required this.petition});
+  final Petition petition;
+
+  @override
+  void initState() {
+    context.read<UserModel>().updateUserData();
+    print("МОИ ГОЛОСА");
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

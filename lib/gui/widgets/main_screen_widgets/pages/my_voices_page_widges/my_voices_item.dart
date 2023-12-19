@@ -78,7 +78,7 @@ class MyVoicesItemWidget extends StatelessWidget {
                       onTap: () async {
                         bool isItemRemovedFromMyVoices = await JsonController().removePetitionFromMyVoices(petition);
                         if(isItemRemovedFromMyVoices) {
-                          context.read<UserModel>().updateUserData();
+                          context.read<UserModel>().updateMyVoices();
                         }
                       },
                       borderRadius: BorderRadius.circular(30),

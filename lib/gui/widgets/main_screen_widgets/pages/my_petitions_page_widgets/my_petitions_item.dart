@@ -78,7 +78,7 @@ class MyPetitionsItemWidget extends StatelessWidget {
                       onTap: () async {
                         bool isItemRemovedFromMyPetitions = await JsonController().removePetitionFromMyPetitions(petition);
                         if(isItemRemovedFromMyPetitions) {
-                          context.read<UserModel>().updateUserData();
+                          context.read<UserModel>().updateMyPetitions();
                         }
                       },
                       borderRadius: BorderRadius.circular(30),

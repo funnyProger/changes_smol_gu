@@ -36,7 +36,7 @@ class _SearchPageState extends State<SearchPage> {
         ),
       ),
       body: FutureBuilder(
-          future: JsonController().getCatalogData('default'),
+          future: JsonController().getCatalogData(),
           builder: (context, snapshot) {
             if(snapshot.hasData) {
               return Container(

@@ -3,8 +3,11 @@ import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/catalog_pa
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/create_petition_page_widgets/create_petition_page_widget.dart';
 import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/profile_page_widgets/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import '../../../../../core/models/internet_connection_model.dart';
+import '../../../../../core/models/user_model.dart';
 import '../../custom_appbar/custom_appbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +19,7 @@ class HomePage extends StatefulWidget {
 
 
 class _HomePageState extends State<HomePage> {
-
+  late final _listener;
 
   List<Widget> _homePagesList() {
     return [
@@ -41,6 +44,28 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Profile"),
     ),
   ];
+
+
+  @override
+  void initState() {
+    _listener = InternetConnection().onStatusChange.listen((InternetStatus status) {
+      switch (status) {
+        case InternetStatus.connected:
+          context.read<InternetConnectionModel>().setInternetConnectionStatus(true);
+          break;
+        case InternetStatus.disconnected:
+          context.read<InternetConnectionModel>().setInternetConnectionStatus(false);
+          break;
+      }
+    });
+    if(context.read<InternetConnectionModel>().getInternetConnectionStatus()) {
+      context.read<UserModel>().updateMyPetitions();
+      context.read<UserModel>().updateMyVoices();
+      context.read<UserModel>().updateFavorites();
+      context.read<UserModel>().updateUserData();
+    }
+    super.initState();
+  }
 
 
   @override

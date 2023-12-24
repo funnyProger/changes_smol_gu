@@ -2,6 +2,7 @@ import 'package:changes_smol_gu/core/controllers/shared_preferences_controller.d
 import 'package:changes_smol_gu/core/models/current_home_page_model.dart';
 import 'package:changes_smol_gu/core/models/current_sign_page_model.dart';
 import 'package:changes_smol_gu/core/models/favorites_model.dart';
+import 'package:changes_smol_gu/core/models/internet_connection_model.dart';
 import 'package:changes_smol_gu/core/models/my_voices_model.dart';
 import 'package:changes_smol_gu/core/models/user_model.dart';
 import 'package:changes_smol_gu/gui/widgets/auth_screen_widgets/sign_page_container.dart';
@@ -23,7 +24,8 @@ void main() async {
           ChangeNotifierProvider(create: (context) => UserModel()),
           ChangeNotifierProvider(create: (context) => MyVoicesModel()),
           ChangeNotifierProvider(create: (context) => MyPetitionsModel()),
-          ChangeNotifierProvider(create: (context) => CurrentHomePageModel())
+          ChangeNotifierProvider(create: (context) => CurrentHomePageModel()),
+          ChangeNotifierProvider(create: (context) => InternetConnectionModel()),
         ],
         child: Application(isUserLoggedIn: isUserLoggedIn),
       )

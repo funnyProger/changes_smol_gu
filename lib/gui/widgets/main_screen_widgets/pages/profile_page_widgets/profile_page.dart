@@ -5,6 +5,7 @@ import 'package:changes_smol_gu/gui/widgets/main_screen_widgets/pages/my_voices_
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:provider/provider.dart';
+import '../../../../../core/models/internet_connection_model.dart';
 import '../../../../../core/models/user_model.dart';
 import '../../../../../data/entities/user.dart';
 import '../../../auth_screen_widgets/sign_page_container.dart';
@@ -17,9 +18,10 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageWidgetState();
 }
 
+
 class _ProfilePageWidgetState extends State<ProfilePage> {
-  final PageController _pageController = PageController(initialPage: 0);
   int _selectedIndex = 0;
+  final PageController _pageController = PageController(initialPage: 0);
 
 
   List<Widget> _getTabItemList(BuildContext context) {
@@ -34,69 +36,79 @@ class _ProfilePageWidgetState extends State<ProfilePage> {
   @override
   void initState() {
     context.read<UserModel>().updateUserData();
-    print("ИНИТ");
     super.initState();
   }
 
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.black87
-      ),
-      child: Column(
-        children: [
-          Expanded(
-            flex: 10,
-            child: userInfo(context.read<UserModel>().getCurrentUserData()),
-          ),
-          Expanded(
-            flex: 8,
-            child: Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(bottom: 16),
-              child: FlutterToggleTab(
-                width: 90, // width in percent
-                borderRadius: 30,
-                height: 40,
-                selectedIndex: _selectedIndex,
-                selectedBackgroundColors: const [Colors.white],
-                unSelectedBackgroundColors: const [Colors.white12],
-                selectedTextStyle: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                ),
-                unSelectedTextStyle: const TextStyle(
+    return Column(
+      children: [
+        Expanded(
+          flex: 10,
+          child: userInfo(context.watch<UserModel>().getCurrentUserData()),
+        ),
+        context.watch<InternetConnectionModel>().getInternetConnectionStatus()
+        ? Expanded(
+          flex: 88,
+          child: Column(
+            children: [
+              Expanded(
+                flex: 8,
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
                     color: Colors.black87,
-                    fontSize: 14,
-                ),
-                labels: const [
-                  'Favorites',
-                  'My Petitions',
-                  'My Voices',
-                ],
-                selectedLabelIndex: (index) {
-                  setState(() {
-                    _selectedIndex = index;
-                    _pageController.animateToPage(
-                      index,
-                      duration: const Duration(microseconds: 400),
-                      curve: Curves.linear
-                    );
-                  });
-                },
-              )
+                  ),
+                  padding: const EdgeInsets.only(),
+                  child: FlutterToggleTab(
+                    width: 90, // width in percent
+                    borderRadius: 30,
+                    height: 40,
+                    selectedIndex: _selectedIndex,
+                    selectedBackgroundColors: const [Colors.white],
+                    unSelectedBackgroundColors: const [Colors.white12],
+                    selectedTextStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                    ),
+                    unSelectedTextStyle: const TextStyle(
+                      color: Colors.black87,
+                      fontSize: 14,
+                    ),
+                    labels: const [
+                      'Favorites',
+                      'My Petitions',
+                      'My Voices',
+                    ],
+                    selectedLabelIndex: (index) {
+                      setState(() {
+                        _selectedIndex = index;
+                        _pageController.animateToPage(
+                            index,
+                            duration: const Duration(microseconds: 400),
+                            curve: Curves.linear
+                        );
+                      });
+                    },
+                  )
+              ),
             ),
+              Expanded(
+                  flex: 80,
+                  child: getProfilePages(context)
+              ),
+            ],
           ),
-          Expanded(
-            flex: 80,
-            child: getProfilePages(context)
-          ),
-        ],
-      )
+        ) :
+            Expanded(
+              flex: 88,
+              child: context.read<InternetConnectionModel>().getInternetErrorWidget(),
+            )
+      ],
     );
   }
+
 
   Widget getProfilePages(BuildContext context) {
     if(context.watch<UserModel>().getCurrentUserData().phoneNumber != '') {
@@ -122,6 +134,9 @@ class _ProfilePageWidgetState extends State<ProfilePage> {
     return Container(
       height: 80,
       alignment: Alignment.center,
+      decoration: const BoxDecoration(
+          color: Colors.black87
+      ),
       child: Row(
         children: [
           Expanded(

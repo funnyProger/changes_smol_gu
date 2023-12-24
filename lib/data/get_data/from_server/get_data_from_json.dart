@@ -12,17 +12,13 @@ class GetDataFromJson implements JsonControllerInterface {
 
 
   @override
-  Future<List<Petition>> getAllPetitions(String catalogMode) async {
+  Future<List<Petition>> getAllPetitions() async {
     /*String token = await SharedPreferencesController().getToken();
     final response = await http.post(
         Uri.parse(''),
         headers: {
           "token": token
         },
-        body: {
-          "mode": catalogMode
-        }
-
     );
 
     if(response.statusCode == 200) {

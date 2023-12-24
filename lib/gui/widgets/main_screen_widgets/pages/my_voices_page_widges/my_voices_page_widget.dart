@@ -19,7 +19,6 @@ class _MyVoicesPageState extends State<MyVoicesPage> {
   @override
   void initState() {
     context.read<UserModel>().updateMyVoices();
-    print("МОИ ГОЛОСА");
     super.initState();
   }
 
@@ -30,9 +29,9 @@ class _MyVoicesPageState extends State<MyVoicesPage> {
     if(context.watch<MyVoicesModel>().getMyVoicesList().isNotEmpty) {
       return Container(
           decoration: const BoxDecoration(
-              color: Colors.black12
+              color: Colors.black87
           ),
-          padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
+          padding: const EdgeInsets.only(left: 8, right: 8),
           child: ClipRRect(
               borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(20),

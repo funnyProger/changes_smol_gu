@@ -35,19 +35,25 @@
 •	Экран создания петиции
 Экран создания петиции нужен, чтобы пользователь мог добавить новую петицию в ленту. Чтобы создать петицию, нужно добавить фото (картинку), название и описание.
 
-  ![image](https://github.com/user-attachments/assets/b55a40a1-e6cb-446e-a3c5-96794571a46f)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b55a40a1-e6cb-446e-a3c5-96794571a46f?raw=true" alt="Sublime's custom image"/>
+</p>
 
 
 •	Экран профиля пользователя
 Профиль пользователя содержит имя пользователя, его email, список избранных петиций, созданных и тех, за которые пользователь проголосовал. Петиции в каждом из списков можно удалить. Также есть кнопка выхода из аккаунта.
 
-  ![image](https://github.com/user-attachments/assets/b1be0361-d600-46cd-9e39-fae882042f55)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b1be0361-d600-46cd-9e39-fae882042f55?raw=true" alt="Sublime's custom image"/>
+</p>
 
 
 •	Экран поиска петиций
 Экран поиска позволяет пользователю найти нужную петицию по ее названию.
 
-  ![image](https://github.com/user-attachments/assets/097fd0d6-543b-4770-8d0d-5bd075788849)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/097fd0d6-543b-4770-8d0d-5bd075788849?raw=true" alt="Sublime's custom image"/>
+</p>
 
 
 Данное приложение может быть взято за основу более масштабного проекта по благоустройству образовательных учреждений глазами студентов, по благоустройству компании глазами работников и в других сферах.

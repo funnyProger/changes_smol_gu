@@ -1,3 +1,5 @@
+____
+
 __Developer (bold)__: Трегубов Богдан
 
 __Project name (bold)__: ChangesSmolGU (Перемены СмолГУ)
